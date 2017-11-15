@@ -1,0 +1,248 @@
+AFG Afeganistao
+ZAF Africa do Sul
+ALB Albania
+GER Alemanha
+AND Andorra
+ANG Angola
+AIA Anguilla
+ANT Antigua Barbuda
+KSA Arabia Saudita
+ALG Argelia
+ARG Argentina
+ARM Armenia
+ARU Aruba
+AUS Australia
+AUT Austria
+AZE Azerbaijao
+BAH Bahamas
+BRN Bahrein
+BAN Bangladesh
+BAR Barbados
+BEL Belgica
+BIZ Belize
+BEN Benin
+BER Bermudas
+BLR Belarus Bielorussia
+BOL Bolivia
+BES Bonaire St Eustatius Saba
+BHI Bosnia Herzegovina
+BOT Botsuana
+BRA Brasil
+BRU Brunei
+BUL Bulgaria
+BUR Burkina Faso
+BDI Burundi
+BHU Butao
+CPV Cabo Verde
+CMR Camaroes
+CAM Camboja
+CAN Canada
+KAZ Cazaquistao
+TCD Chade
+CHI Chile
+CHN China
+CYP Chipre
+SIN Singapura
+COL Colombia
+CGO Congo
+PRK Coreia do Norte
+KOR Coreia do Sul
+CIV Costa do Marfim
+CRC Costa Rica
+CRO Croacia
+CUB Cuba
+NAC Curacao
+DEN Dinamarca
+DJI Djibuti
+DMA Dominica
+EGY Egito
+ESA El Salvador
+UAE Emirados Arabes Unidos
+ECU Equador
+ERI Eritreia
+SVK Eslovaquia
+SLO Eslovenia
+ESP Espanha
+USA Estados Unidos
+EST Estonia
+ETH Etiopia
+RUS Federacao Russa
+FIJ Fiji
+PHI Filipinas
+FIN Finlandia
+FRA Franca
+GAB Gabao
+GAM Gambia
+GHA Gana
+GEO Georgia
+GBZ Gibraltar
+GBR Gra Bretanha Reino Unido
+GRN Granada
+GRE Grecia
+GRL Groelandia
+GLP Guadalupe
+GUM Guam Territorio dos Estados Unidos
+GUA Guatemala
+GGY Guernsey
+GUY Guiana
+GUF Guiana Francesa
+GUI Guine
+GEQ Guine Equatorial
+GBS Guine Bissau
+HAI Haiti
+HOL Holanda
+HON Honduras
+HKG Hong Kong
+HUN Hungria
+YEM Iemen
+BVT Ilha Bouvet Ter da Noruega
+IMN Ilha do Homem
+CXR Ilha Natal
+PCN Ilha Pitcairn
+REU Ilha Reuniao
+ALD Ilhas Aland
+CYM Ilhas Cayman
+CCK Ilhas Cocos
+COM Ilhas Comores
+COK Ilhas Cook
+FRO Ilhas Faroes
+FLK Ilhas Falkland Malvinas
+SGS Ilhas Georgia do Sul e Sandwich do Sul
+HMD Ilhas Heard e McDonald Ter da Australia
+MNP Ilhas Marianas do Norte
+MHL Ilhas Marshall
+UMI Ilhas Menores dos Estados Unidos
+NFK Ilhas Norfolk
+SYC Ilhas Seychelles
+SLB Ilhas Solomao
+SJM Ilhas Svalbard Jan Mayen
+TKL Ilhas Tokelau
+TCA Ilhas Turks e Caicos
+VIR Ilhas Virgens Estados Unidos
+VGB Ilhas Virgens Inglaterra
+WLF Ilhas Wallis Futuna
+IND India
+INA Indonesia
+IRI Ira
+IRQ Iraque
+IRL Irlanda
+ISL Islandia
+ISR Israel
+ITA Italia
+JAM Jamaica
+JPN Japao
+JEY Jersey
+JOR Jordania
+KIR Kiribati
+KUW Kuait
+LAO Laos
+LAT Latvia Letonia
+LES Lesoto
+LIB Libano
+LBR Liberia
+LBA Libia
+LIE Liechtenstein
+LTU Lituania
+LUX Luxemburgo
+MAC Macau
+MKD Macedonia Republica Yugoslava
+MAD Madagascar
+MAS Malasia
+MAW Malaui
+MDV Maldivas
+MLI Mali
+MLT Malta
+MAR Marrocos
+MTQ Martinica
+MRI Mauricio
+MTN Mauritania
+MYT Mayotte
+MEX Mexico
+FSM Micronesia
+MOZ Mocambique
+MDA Moldova
+MON Monaco
+MGL Mongolia
+MNE Montenegro
+MSR Montserrat
+MYA Myanmar
+NAM Namibia
+NRU Nauru
+NEP Nepal
+NCA Nicaragua
+NIG Niger
+NGR Nigeria
+NIU Niue
+NOR Noruega
+NCL Nova Caledonia
+NZL Nova Zelandia
+OMA Oma
+PLW Palau
+PAN Panama
+PNG Papua Nova Guine
+PAK Paquistao
+PRY Paraguai
+PER Peru
+PYF Polinesia Francesa
+POL Polonia
+PUR Porto Rico
+POR Portugal
+QAT Qatar
+KEN Quenia
+KIR Quirguistao
+CAF Republica Centro Africana
+COD Republica Democratica do Congo
+DOM Republica Dominicana
+CZE Republica Tcheca
+ROU Romenia
+RWA Ruanda
+ESH Saara Ocidental
+VCT Saint Vincent e Granadinas
+ASA Samoa Americana
+SAM Samoa
+San Marino
+SHN Santa Helena
+LCA Santa Lucia
+BLM Sao Bartolomeu
+KNA Sao Cristovao e Nevis
+MAF San Martin
+STP Sao Tome e Principe
+SEN Senegal
+SLE Sierra Leoa
+SRB Servia
+SYR Siria
+SOM Somalia
+SRI Sri Lanka
+SXM St Maarten
+SPM St Pierre e Miquelon
+SWZ Suazilandia
+SUD Sudao
+SSD Sudao do Sul
+SWD Suecia
+SUI Suica
+SUR Suriname
+TJK Tadjiquistao
+THA Tailandia
+TWN Taiwan
+TAN Tanzania
+IOT Ter Britanico do Oceano Indico
+ATF Ter do Sul da Franca
+PSE Ter Palestinos Ocupados
+TLS Timor Leste
+TOG Togo
+TGA Tonga
+TTO Trinidad Tobago
+TUN Tunisia
+TKM Turcomenistao
+TUR Turquia
+TUV Tuvalu
+UKR Ucrania
+UGA Uganda
+URU Uruguai
+UZB Uzbequistao
+VAN Vanuatu
+VAT Vaticano
+VEN Venezuela
+VIE Vietna
+ZAM Zambia
+ZIM Zimbabue
