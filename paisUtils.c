@@ -1,7 +1,7 @@
 //Protótipos
 
-int getListaPaises(int retornarSiglas, char listaSiglas[][4], int retornarNomes, char listaNomes[][60]);
-void lePais (char *sigla, char *nome, char *mensagem);
+int getListaPaises(int flagRetornarSiglas, char listaSiglas[][4], int flagRetornarNomes, char listaNomes[][60]);
+void lePais (int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome, char *mensagem);
 void exibicaoPaises();
 
 
@@ -31,9 +31,9 @@ void exibicaoPaises(){
 		}
 		for(aux='a'; aux<='z'; aux++){
 			if(aux==atual){
-				printf("|%c| ",toupper(aux));
+				printf("|%c|",toupper(aux));
 			}else{
-				printf(" %c  ",aux);
+				printf(" %c ",aux);
 			}
 		}
 		
@@ -52,17 +52,51 @@ void exibicaoPaises(){
 	}while(opcao != '0');
 }
 
-void lePais (char *sigla, char *nome, char *mensagem){
-	int qtdRegistros = 0, i=0;
-	char listaSiglas[250][4], listaNomes[250][60];
+void lePais (int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome, char *mensagem){ 
+	int qtdRegistros = 0, i=0, siglaValida=0;
+	char listaSiglas[250][4], listaNomes[250][60], siglaSelecionada[10], opcao;
 	
-	getListaPaises(1, listaSiglas, 1, listaNomes);
-	
-	exibicaoPaises();
-
+	qtdRegistros = getListaPaises(1, listaSiglas, 1, listaNomes);
+	do{
+		opcao = leValidaOpcao('1', '2', "Selecao de pais:\n1-Consultar lista de paises\n2-Selecionar pais por sigla");
+		switch(opcao){
+		case '1':
+			exibicaoPaises();
+			break;
+		case '2':
+			do{
+				printf("%s\n",mensagem);
+				fflush(stdin);
+				gets(siglaSelecionada);
+				fflush(stdin);
+				system("cls");
+				if(strlen(siglaSelecionada)==3){
+					for(i=0; i<qtdRegistros; i++){
+						if(		toupper(siglaSelecionada[0])==toupper(listaSiglas[i][0]) && 
+								toupper(siglaSelecionada[1])==toupper(listaSiglas[i][1]) &&
+								toupper(siglaSelecionada[2])==toupper(listaSiglas[i][2])){
+							siglaValida=1;
+							if(flagRetornaSigla){
+								strcpy(sigla, listaSiglas[i]);
+							}
+							if(flagRetornaNome){
+								strcpy(nome, listaNomes[i]);
+							}
+							break;
+						}
+					}
+				}else{
+					printf("Sigla deve conter apenas 3 caracteres!\n");
+					system("pause");
+					system("cls");
+				}
+			}while(!siglaValida);
+			break;
+		}
+	}while(!siglaValida);
 }
 
-int getListaPaises(int retornarSiglas, char listaSiglas[][4], int retornarNomes, char listaNomes[][60]){
+int getListaPaises(int flagRetornarSiglas, char listaSiglas[][4], int flagRetornarNomes, char listaNomes[][60]){
 	int qtdRegistros=0, i=0, j=0;
 	char buffer[100], temp[4];
 	FILE* arquivo;
@@ -72,13 +106,13 @@ int getListaPaises(int retornarSiglas, char listaSiglas[][4], int retornarNomes,
 		arquivo = fopen("database/paises.txt", "r");
 		for(i=0; i<qtdRegistros; i++){
 			fgets(buffer, 100, arquivo);
-			if(retornarSiglas){
+			if(flagRetornarSiglas){
 				listaSiglas[i][0] = buffer[0];
 				listaSiglas[i][1] = buffer[1];
 				listaSiglas[i][2] = buffer[2];
 				listaSiglas[i][3]='\0';	
 			}
-			if(retornarNomes){
+			if(flagRetornarNomes){
 				j=0;
 				while(buffer[j+4] != '\n' && buffer[j+4] != '\0'){
 					listaNomes[i][j]=buffer[j+4];

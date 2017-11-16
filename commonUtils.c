@@ -95,7 +95,7 @@ void leValidaNome(char mensagem[], char destino[]){
 			if(resultado==1){
 				printf("Nome nao pode iniciar com espaco em branco!\n");
 			} else if(resultado==2){
-				printf("Nome nao pode conter numeros ou carcateres especiais!\n");
+				printf("Nome nao pode conter numeros ou caracteres especiais!\n");
 			}else if(resultado==3){
 				printf("Nome deve conter apenas espacos simples!\n");
 			}else if(resultado==4){
@@ -103,7 +103,7 @@ void leValidaNome(char mensagem[], char destino[]){
 			}else if(resultado==5){
 				printf("Nome nao pode acabar com espaco em branco!\n");
 			}else if(resultado){
-				printf("Nome invalido!");
+				printf("Nome invalido!\n");
 			}
 		}
 	}while(resultado);

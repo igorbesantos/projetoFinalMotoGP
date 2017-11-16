@@ -101,15 +101,14 @@ void cadastrarPiloto(){
 	}
 	leValidaNome("Informe o nome do piloto:\n", novo.nome);
 	
-	lePais("a", "a", "a");
+	lePais(0, " ", 1, novo.pais, "Informe a pais do piloto: ");
 	
-	printf("%d : %s", novo.id, novo.nome);
+	printf(" Id: %d\n Nome:%s\n Pais:%s\n", novo.id, novo.nome, novo.pais);
 	
 	
 	//equipe
 	//dataNasc
 	//sexo
-	//pais
 
 	
 }
