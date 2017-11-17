@@ -95,32 +95,6 @@ HON Honduras
 HKG Hong Kong
 HUN Hungria
 YEM Iemen
-BVT Ilha Bouvet Ter da Noruega
-IMN Ilha do Homem
-CXR Ilha Natal
-PCN Ilha Pitcairn
-REU Ilha Reuniao
-ALD Ilhas Aland
-CYM Ilhas Cayman
-CCK Ilhas Cocos
-COM Ilhas Comores
-COK Ilhas Cook
-FRO Ilhas Faroes
-FLK Ilhas Falkland Malvinas
-SGS Ilhas Georgia do Sul e Sandwich do Sul
-HMD Ilhas Heard e McDonald Ter da Australia
-MNP Ilhas Marianas do Norte
-MHL Ilhas Marshall
-UMI Ilhas Menores dos Estados Unidos
-NFK Ilhas Norfolk
-SYC Ilhas Seychelles
-SLB Ilhas Solomao
-SJM Ilhas Svalbard Jan Mayen
-TKL Ilhas Tokelau
-TCA Ilhas Turks e Caicos
-VIR Ilhas Virgens Estados Unidos
-VGB Ilhas Virgens Inglaterra
-WLF Ilhas Wallis Futuna
 IND India
 INA Indonesia
 IRI Ira

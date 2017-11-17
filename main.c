@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include <time.h>
 
-#define TAM_NOME 60
+#define TAM_NOME 50
 #define MAX_EQUIPES 200
 
 #include "commonUtils.c"

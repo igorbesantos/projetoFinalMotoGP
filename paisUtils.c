@@ -1,6 +1,6 @@
 //Protótipos
 
-int getListaPaises(int flagRetornarSiglas, char listaSiglas[][4], int flagRetornarNomes, char listaNomes[][60]);
+int getListaPaises(int flagRetornarSiglas, char listaSiglas[][4], int flagRetornarNomes, char listaNomes[][TAM_NOME]);
 void lePais (int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome, char *mensagem);
 void exibicaoPaises();
 
@@ -9,7 +9,7 @@ void exibicaoPaises();
 
 void exibicaoPaises(){
 	int qtdRegistros = 0, i=0;
-	char listaSiglas[250][4], listaNomes[250][60], opcao, aux, atual;
+	char listaSiglas[250][4], listaNomes[250][TAM_NOME], opcao, aux, atual;
 	char instrucoes[300] = "Instrucoes:\n\nUse as teclas < e > para navegas entre as letras e encontrar os paises.\n\nOu pressione a LETRA para pular direto para a mesma.\n\nPressione 0 para sair a qualquer momento.\n\nOBS: A organizacao e feita pela inicial do pais e nao da sigla.\n\n";
 	qtdRegistros = getListaPaises(1, listaSiglas, 1, listaNomes);
 	printf("%s", instrucoes);
@@ -44,6 +44,7 @@ void exibicaoPaises(){
 				printf(" %s  ( %s )\n", listaNomes[i], listaSiglas[i]);
 			}
 		}
+		printf("\n\nPressione 0 para voltar a qualquer momento");
 		do{
 			opcao = getch();
 			opcao = tolower(opcao);
@@ -54,11 +55,12 @@ void exibicaoPaises(){
 
 void lePais (int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome, char *mensagem){ 
 	int qtdRegistros = 0, i=0, siglaValida=0;
-	char listaSiglas[250][4], listaNomes[250][60], siglaSelecionada[10], opcao;
+	char listaSiglas[250][4], listaNomes[250][TAM_NOME], siglaSelecionada[10], opcao;
+	char menuOpcoes[100] = "Selecao de pais:\n1-Consultar lista de paises\n2-Selecionar pais por sigla";
 	
 	qtdRegistros = getListaPaises(1, listaSiglas, 1, listaNomes);
 	do{
-		opcao = leValidaOpcao('1', '2', "Selecao de pais:\n1-Consultar lista de paises\n2-Selecionar pais por sigla");
+		opcao = leValidaOpcao('1', '2', menuOpcoes);
 		switch(opcao){
 		case '1':
 			exibicaoPaises();
@@ -96,11 +98,12 @@ void lePais (int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome,
 	}while(!siglaValida);
 }
 
-int getListaPaises(int flagRetornarSiglas, char listaSiglas[][4], int flagRetornarNomes, char listaNomes[][60]){
+int getListaPaises(int flagRetornarSiglas, char listaSiglas[][4], int flagRetornarNomes, char listaNomes[][TAM_NOME]){
 	int qtdRegistros=0, i=0, j=0;
 	char buffer[100], temp[4];
 	FILE* arquivo;
 	printf("Carregando, aguarde...\n");
+	fflush(stdin);
 	qtdRegistros = qtdRegistrosArquivo("database/paises.txt");
 	if(qtdRegistros>0){
 		arquivo = fopen("database/paises.txt", "r");
@@ -125,3 +128,5 @@ int getListaPaises(int flagRetornarSiglas, char listaSiglas[][4], int flagRetorn
 	system("cls");
 	return qtdRegistros;
 }
+
+

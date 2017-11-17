@@ -8,6 +8,7 @@ int leValidaInteiro(int min, int max, char *mensagem);
 int aleatorio(int min, int max);
 int qtdRegistrosArquivo(char *caminhoArquivo);
 int isIntNaLista(int numero, int lista[], int tamLista);
+void converteCharParaInt(int *destino, char *entrada);
 
 //Implementações
 
@@ -120,10 +121,12 @@ int leValidaInteiro(int min, int max, char *mensagem){
 	do{
 		printf("%s\n", mensagem);
 		scanf("%d", &numero);
+		system("cls");
 		if(numero<min || numero>max){
 			printf("Numero invalido!\n");
 		}
 	}while(numero<min || numero>max);
+	fflush(stdin);
 	return numero;
 }
 
@@ -173,4 +176,41 @@ int isIntNaLista(int numero, int lista[], int tamLista){
 		}
 	}
 	return 0;
+}
+
+void converteCharParaInt(int *destino, char *entrada){
+	switch(*entrada){
+		case '0':
+			*destino = 0;
+			break;
+		case '1':
+			*destino = 1;
+			break;
+		case '2':
+			*destino = 2;
+			break;
+		case '3':
+			*destino = 3;
+			break;
+		case '4':
+			*destino = 4;
+			break;
+		case '5':
+			*destino = 5;
+			break;
+		case '6':
+			*destino = 6;
+			break;
+		case '7':
+			*destino = 7;
+			break;
+		case '8':
+			*destino = 8;
+			break;
+		case '9':
+			*destino = 9;
+			break;
+		default:
+			*destino = -1;
+	}
 }

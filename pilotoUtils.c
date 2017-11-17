@@ -92,6 +92,13 @@ void cadastrarPiloto(){
 	//TODO
 	piloto novo;
 
+	if(!leEquipe(1, novo.siglaEquipe, 0, " ", "Informe a sigla da equipe do piloto:\n")){
+		printf("Nao foi possivel cadastrar piloto pois nao existem equipes cadastradas!\n");
+		system("pause");
+		system("cls");
+		return;
+	}
+
 	novo.id = leValidaIdPiloto();
 	if(novo.id<0){
 		printf("Maximo de pilotos ja cadastrados!\n");
@@ -103,14 +110,17 @@ void cadastrarPiloto(){
 	
 	lePais(0, " ", 1, novo.pais, "Informe a pais do piloto: ");
 	
-	printf(" Id: %d\n Nome:%s\n Pais:%s\n", novo.id, novo.nome, novo.pais);
+	do{
+		printf("Informe o sexo do piloto:\nM - Masculino\nF - Feminino\n");
+		novo.sexo = getch();
+		novo.sexo = toupper(novo.sexo);
+	}while(novo.sexo!='F' && novo.sexo!='M');
 	
-	
-	//equipe
-	//dataNasc
-	//sexo
+	leData(novo.dataNasc, 1900, 2000);
 
-	
+	printf(" Id: %d\n Nome:%s\n Pais:%s\n Equipe:%s\n Sexo:%c\n Nascimento:%s", novo.id, novo.nome, novo.pais, novo.siglaEquipe, novo.sexo, novo.dataNasc);
+	system("pause");
+	system("cls");
 }
 
 void alterarPiloto(){
