@@ -19,6 +19,7 @@ void converteCharParaInt(int *destino, char *entrada);
 */
 char leValidaOpcao(char min, char max, char *mensagem){
 	char opcao;
+	fflush(stdin);
 	do{
 		printf("%s", mensagem);
 		opcao = getch();

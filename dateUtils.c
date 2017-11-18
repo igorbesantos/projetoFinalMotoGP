@@ -8,14 +8,15 @@ typedef struct {
 void leData(char *saidaFormatada, int anoMin, int anoMax);
 void formataData(char *saidaFormatada, int dia, int mes, int ano);
 void interpretaDataFormatada(int *dia, int *mes, int *ano, char *dataFormatada);
+int getDiaSemana(int dia, int mes, int ano);
 
 //Implementações
 void leData(char *saidaFormatada, int anoMin, int anoMax){
 	int ano=0, mes=0, dia=0, maxDia=0;
 	
-	ano = leValidaInteiro(anoMin, anoMax, "Informe o ano de nascimento do piloto (AAAA):\n");
+	ano = leValidaInteiro(anoMin, anoMax, "Informe o ano de nascimento do piloto (AAAA):");
 	
-	mes = leValidaInteiro(1, 12, "Informe o mes de nascimento do piloto (1 - 12):\n");
+	mes = leValidaInteiro(1, 12, "Informe o mes de nascimento do piloto (1 - 12):");
 	
 	switch(mes){
 	case 1:
@@ -42,7 +43,7 @@ void leData(char *saidaFormatada, int anoMin, int anoMax){
 		break;
 	}
 	
-	dia = leValidaInteiro(1, maxDia, "Informe o dia de nascimento do piloto:\n");
+	dia = leValidaInteiro(1, maxDia, "Informe o dia de nascimento do piloto:");
 	
 	formataData(saidaFormatada, dia, mes, ano);
 }
@@ -86,9 +87,53 @@ void interpretaDataFormatada(int *dia, int *mes, int *ano, char *dataFormatada){
 				break;
 		}
 	}
-	
-	
-	
 }
 
+int getDiaSemana(int dia, int mes, int ano){
+	int diferencaAnos=0, qtdDiasExtraFev=0, codigoMes=0, diaSemana=0;
+	
+	diferencaAnos = ano - 1900;
+	qtdDiasExtraFev = diferencaAnos/4;
+	if((ano%4==0) && (ano%100!=0)){
+		if(mes<=2){
+			qtdDiasExtraFev--;
+		}
+	}
+	
+	switch(mes){
+	case 1:
+	case 10:
+		codigoMes=0;
+		break;
+	case 5:
+		codigoMes=1;
+		break;
+	case 8:
+		codigoMes=2;
+		break;
+	case 2:
+	case 3:
+	case 11:
+		codigoMes=3;
+		break;
+	case 6:
+		codigoMes=4;
+		break;
+	case 9:
+	case 12:
+		codigoMes=5;
+		break;
+	case 4:
+	case 7:
+		codigoMes=6;
+		break;
+	}
+	
+	dia--;
+	
+	diaSemana = diferencaAnos + qtdDiasExtraFev + codigoMes + dia;
+	
+	//OBS: Segunda = 0 / Domingo = 6
+	return diaSemana;
+}
 

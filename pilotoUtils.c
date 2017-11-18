@@ -15,6 +15,7 @@ int getListaIdsPilotos(int listaIds[]);
 int leValidaIdPiloto();
 void alterarPiloto();
 void excluirPiloto();
+void gravarPiloto(piloto *novoPiloto, int flagReceberFeedback);
 
 //Implementações
 
@@ -88,6 +89,30 @@ int leValidaIdPiloto(){
 	return id;
 }
 
+void gravarPiloto(piloto *novoPiloto, int flagReceberFeedback){
+	FILE* arquivo;
+	
+	if(arquivo = fopen("database/pilotos.txt", "a")){
+		fprintf(arquivo, "%3d %-50s %3s %10s %c %-50s\n", 
+							novoPiloto[0].id, 
+							novoPiloto[0].nome, 
+							novoPiloto[0].siglaEquipe,
+							novoPiloto[0].dataNasc,
+							novoPiloto[0].sexo,
+							novoPiloto[0].pais);
+		fclose(arquivo);
+		if(flagReceberFeedback){
+			printf("Piloto %s cadastrado com sucesso!\n", novoPiloto[0].nome);
+			system("pause");
+			system("cls");
+		}
+	}else if(flagReceberFeedback){
+		printf("Nao foi possivel gravar o piloto!\n");
+		system("pause");
+		system("cls");
+	}
+}
+
 void cadastrarPiloto(){
 	//TODO
 	piloto novo;
@@ -114,17 +139,28 @@ void cadastrarPiloto(){
 		printf("Informe o sexo do piloto:\nM - Masculino\nF - Feminino\n");
 		novo.sexo = getch();
 		novo.sexo = toupper(novo.sexo);
+		system("cls");
 	}while(novo.sexo!='F' && novo.sexo!='M');
 	
 	leData(novo.dataNasc, 1900, 2000);
 
-	printf(" Id: %d\n Nome:%s\n Pais:%s\n Equipe:%s\n Sexo:%c\n Nascimento:%s", novo.id, novo.nome, novo.pais, novo.siglaEquipe, novo.sexo, novo.dataNasc);
-	system("pause");
-	system("cls");
+	gravarPiloto(&novo, 1);
 }
 
 void alterarPiloto(){
-	//TODO
+	char opcao, menu[200] = "Escolha uma opcao:\n1-Ver lista de pilotos cadastrados\n2-Alterar piloto por código";
+	
+	do{
+		opcao = leValidaOpcao('1','2', menu);
+		switch(opcao){
+			case '1':
+				//TODO
+				break;
+			case '2':
+				//TODO
+				break;
+		}
+	}while(opcao='1');
 }
 
 void excluirPiloto(){

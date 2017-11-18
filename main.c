@@ -6,6 +6,7 @@
 
 #define TAM_NOME 50
 #define MAX_EQUIPES 200
+#define MAX_CIRCUITOS 200
 
 #include "commonUtils.c"
 #include "dateUtils.c"
@@ -47,7 +48,6 @@ int main() {
 						opcao = leValidaOpcao('0','3', menu11);
 						switch(opcao){
 							case '1':
-								//TODO Incluir piloto
 								cadastrarPiloto();
 								break;
 							case '2':
@@ -64,7 +64,6 @@ int main() {
 						opcao = leValidaOpcao('0', '2', menu12);
 						switch(opcao){
 							case '1':
-								//TODO Incluir equipe
 								cadastrarEquipe();
 								break;
 							case '2':
@@ -76,7 +75,7 @@ int main() {
 						opcao = leValidaOpcao('0','2', menu13);
 						switch(opcao){
 							case '1':
-								//TODO Incluir circuito
+								cadastrarCircuito();
 								break;
 							case '2':
 								//TODO Alterar circuito
@@ -87,7 +86,7 @@ int main() {
 						opcao = leValidaOpcao('0','3', menu14);
 						switch(opcao){
 							case '1':
-								//TODO Incluir volta
+								cadastraMelhorVolta();
 								break;
 							case '2':
 								//TODO Alterar volta
