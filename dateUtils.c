@@ -14,9 +14,9 @@ int getDiaSemana(int dia, int mes, int ano);
 void leData(char *saidaFormatada, int anoMin, int anoMax){
 	int ano=0, mes=0, dia=0, maxDia=0;
 	
-	ano = leValidaInteiro(anoMin, anoMax, "Informe o ano de nascimento do piloto (AAAA):");
+	ano = leValidaInteiro(anoMin, anoMax, "Informe o ano (AAAA):");
 	
-	mes = leValidaInteiro(1, 12, "Informe o mes de nascimento do piloto (1 - 12):");
+	mes = leValidaInteiro(1, 12, "Informe o mes (1 - 12):");
 	
 	switch(mes){
 	case 1:
@@ -43,23 +43,23 @@ void leData(char *saidaFormatada, int anoMin, int anoMax){
 		break;
 	}
 	
-	dia = leValidaInteiro(1, maxDia, "Informe o dia de nascimento do piloto:");
+	dia = leValidaInteiro(1, maxDia, "Informe o dia:");
 	
 	formataData(saidaFormatada, dia, mes, ano);
 }
 
 void formataData(char *saidaFormatada, int dia, int mes, int ano){
-	sprintf(saidaFormatada, "%2d/%2d/%4d",dia,mes,ano);
+	sprintf(saidaFormatada, "%02d/%02d/%04d",dia,mes,ano);
 }
 
-void interpretaDataFormatada(int *dia, int *mes, int *ano, char *dataFormatada){
+void interpretaDataFormatada(int *dia, int *mes, int *ano, char dataFormatada[]){
 	int aux=0, i=0;
 	*dia = 0;
 	*mes = 0;
 	*ano = 0;
 	
 	for(i=9; i>=0; i--){
-		converteCharParaInt(&aux,dataFormatada);
+		converteCharParaInt(&aux, dataFormatada[i]);
 		switch(i){
 			case 0:
 				*dia += aux*10;
@@ -131,7 +131,9 @@ int getDiaSemana(int dia, int mes, int ano){
 	
 	dia--;
 	
-	diaSemana = diferencaAnos + qtdDiasExtraFev + codigoMes + dia;
+	diaSemana = (diferencaAnos + qtdDiasExtraFev + codigoMes + dia)%7;
+	printf("%d / %d / %d\n", dia, mes, ano);
+	system("pause");
 	
 	//OBS: Segunda = 0 / Domingo = 6
 	return diaSemana;

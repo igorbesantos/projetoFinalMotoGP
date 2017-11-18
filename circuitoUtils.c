@@ -51,7 +51,7 @@ void gravarCircuito(circuito *novo, int flagReceberFeedback){
 	FILE* arquivo;
 	
 	if(arquivo = fopen("database/circuitos.txt", "a")){
-		fprintf(arquivo, "%3d %-50s %-50s %8.2f\n",
+		fprintf(arquivo, "%03d %-50s %-50s %08.2f\n",
 							novo[0].id,
 							novo[0].nome,
 							novo[0].pais,
@@ -76,24 +76,28 @@ int getListaCircuitos(int flagRetornarCod, int listaCod[], int flagRetornarNomes
 	printf("Carregando, aguarde...\n");
 	fflush(stdin);
 	qtdRegistros = qtdRegistrosArquivo("database/circuitos.txt");
+	
 	if(qtdRegistros>0){
-		arquivo = fopen("database/circuitos.txt", "r");
-		for(i=0; i<qtdRegistros; i++){
-			fgets(buffer, 100, arquivo);
-			if(flagRetornarCod){
-				fscanf(arquivo, "%d", listaCod[i]);
-			}else{
-				fscanf(arquivo, "%d", intBuffer);
-			}
-			fgets(buffer, 199, arquivo);
-			if(flagRetornarNomes){
-				for(j=0; j<TAM_NOME; j++){
-					listaNomes[i][j] = buffer[j];
+		if(arquivo = fopen("database/circuitos.txt", "r")){
+			for(i=0; i<qtdRegistros; i++){
+				if(flagRetornarCod){
+					fscanf(arquivo, "%d", &listaCod[i]);
+				}else{
+					fscanf(arquivo, "%d", &intBuffer);
 				}
-				listaNomes[i][TAM_NOME-1]='\0';
+				fgetc(arquivo);
+				if(flagRetornarNomes){
+					j=0;
+					while(j<TAM_NOME && buffer[j]!='\n'){
+						listaNomes[i][j] = buffer[j];
+						j++;
+					}
+					listaNomes[i][j]='\0';
+				}
+				fgets(buffer, 199, arquivo);
 			}
+			fclose(arquivo);
 		}
-		fclose(arquivo);
 	}
 	system("cls");
 	return qtdRegistros;

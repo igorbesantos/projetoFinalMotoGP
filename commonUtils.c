@@ -8,7 +8,7 @@ int leValidaInteiro(int min, int max, char *mensagem);
 int aleatorio(int min, int max);
 int qtdRegistrosArquivo(char *caminhoArquivo);
 int isIntNaLista(int numero, int lista[], int tamLista);
-void converteCharParaInt(int *destino, char *entrada);
+void converteCharParaInt(int *destino, char entrada);
 
 //Implementações
 
@@ -179,8 +179,8 @@ int isIntNaLista(int numero, int lista[], int tamLista){
 	return 0;
 }
 
-void converteCharParaInt(int *destino, char *entrada){
-	switch(*entrada){
+void converteCharParaInt(int *destino, char entrada){
+	switch(entrada){
 		case '0':
 			*destino = 0;
 			break;

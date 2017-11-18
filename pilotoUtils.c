@@ -93,7 +93,7 @@ void gravarPiloto(piloto *novoPiloto, int flagReceberFeedback){
 	FILE* arquivo;
 	
 	if(arquivo = fopen("database/pilotos.txt", "a")){
-		fprintf(arquivo, "%3d %-50s %3s %10s %c %-50s\n", 
+		fprintf(arquivo, "%03d %-50s %3s %10s %c %-50s\n", 
 							novoPiloto[0].id, 
 							novoPiloto[0].nome, 
 							novoPiloto[0].siglaEquipe,
@@ -114,7 +114,6 @@ void gravarPiloto(piloto *novoPiloto, int flagReceberFeedback){
 }
 
 void cadastrarPiloto(){
-	//TODO
 	piloto novo;
 
 	if(!leEquipe(1, novo.siglaEquipe, 0, " ", "Informe a sigla da equipe do piloto:\n")){
@@ -142,7 +141,11 @@ void cadastrarPiloto(){
 		system("cls");
 	}while(novo.sexo!='F' && novo.sexo!='M');
 	
+	printf("A seguir, informe a data de nascimento do piloto...\n");
+	system("pause");
+	system("cls");
 	leData(novo.dataNasc, 1900, 2000);
+	fflush(stdin);
 
 	gravarPiloto(&novo, 1);
 }
