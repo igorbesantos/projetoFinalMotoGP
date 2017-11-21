@@ -1,3 +1,7 @@
+/* Alunos:							Matrículas:	
+	Igor Bezerra dos Santos			UC16101948
+	João Henrique Braz da Silva		UC16101210
+*/
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
