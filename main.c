@@ -5,8 +5,8 @@
 #include <time.h>
 
 #define TAM_NOME 50
-#define MAX_EQUIPES 200
-#define MAX_CIRCUITOS 200
+#define MAX_EQUIPES 50
+#define MAX_CIRCUITOS 50
 
 #include "commonUtils.c"
 #include "dateUtils.c"

@@ -98,7 +98,7 @@ void salvarEquipe(equipe *nova){
 
 int getListaEquipes(int flagRetornarSiglas, char listaSiglas[][4], int flagRetornarNomes, char listaNomes[][TAM_NOME]){
 	FILE* arquivo;
-	int qtdRegistros=0, resultado=0, i=0, j=0;
+	int qtdRegistros=0, i=0, j=0;
 	char buffer[200];
 	
 	qtdRegistros = qtdRegistrosArquivo("database/equipes.txt");
@@ -120,10 +120,9 @@ int getListaEquipes(int flagRetornarSiglas, char listaSiglas[][4], int flagRetor
 				}
 			}
 			fclose(arquivo);
-			resultado=1;
 		}
 	}
-	return resultado;
+	return qtdRegistros;
 }
 
 int leEquipe(int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome, char *mensagem){
@@ -139,10 +138,6 @@ int leEquipe(int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome,
 				printf("Sigla - Nome\n");
 				for(i=0; i<qtdRegistros; i++){
 					printf("%s   - %s\n",listaSiglas[i], listaNomes[i]);
-					if((i%20)==0){
-						system("pause");
-						system("cls");
-					}
 				}
 				break;
 			case '2':
