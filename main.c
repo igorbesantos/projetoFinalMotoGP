@@ -11,6 +11,7 @@
 #define TAM_NOME 50
 #define MAX_EQUIPES 50
 #define MAX_CIRCUITOS 50
+#define MAX_MELHORES_VOLTAS 50
 
 #include "commonUtils.c"
 #include "dateUtils.c"
@@ -36,6 +37,15 @@ int main() {
 	
 	char opcao;
 	int encerrarPrograma = 0;
+	
+	
+	
+	
+	
+	int z, qtd;
+	melhorVolta listaVoltas[MAX_MELHORES_VOLTAS];
+	
+	
 
 //Instruções
 	do{
@@ -56,7 +66,13 @@ int main() {
 								break;
 							case '3':
 								//TODO Excluir piloto
-								excluirPiloto();
+								//excluirPiloto();
+								
+								qtd =  buscaMelhoresVoltas(listaVoltas);
+								for(z=0; z<qtd; z++){
+									printf("%d %d %s %s\n", listaVoltas[z].idPiloto, listaVoltas[z].idCircuito, listaVoltas[z].data, listaVoltas[z].tempo);
+								}
+								system("pause");
 								break;
 						}
 						break;

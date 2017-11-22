@@ -14,6 +14,7 @@ void cadastrarEquipe();
 void salvarEquipe(equipe *nova);
 int getListaEquipes(int flagRetornarSiglas, char listaSiglas[][4], int flagRetornarNomes, char listaNomes[][TAM_NOME]);
 int leEquipe(int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome, char *mensagem);
+int buscaEquipes(equipe listaEquipes[]);
 
 //Implementações
 
@@ -180,5 +181,63 @@ int leEquipe(int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome,
 	return resultado;
 }
 
-
+int buscaEquipes(equipe listaEquipes[]){
+	FILE* arquivo;
+	int qtdRegistros=0, i=0, j=0, k=0, aux=0;
+	char buffer;
+	
+	qtdRegistros = qtdRegistrosArquivo("database/equipes.txt");
+	
+	if(arquivo = fopen("database/equipes.txt", "rt")){
+		for(i=0; i<qtdRegistros; i++){
+			aux=0;
+			k=0;
+			for(j=0; j<=105; j++){
+				buffer = fgetc(arquivo);
+				if(j<50){
+					if(aux<3){
+						if(aux==2 || j==49){
+							listaEquipes[i].nome[k] = '\0';
+							aux=3;
+						}else{
+							if(buffer==' '){
+								aux++;
+							}else{
+								aux=0;
+							}
+							listaEquipes[i].nome[k] = buffer;
+							k++;
+						}
+					}
+				}else if(j==50){
+					k=0;
+					aux=0;
+				}else if(j<54){
+					listaEquipes[i].sigla[k] = buffer;
+					k++;
+				}else if(j==54){
+					k=0;
+					aux=0;
+				}else{
+					if(aux<3){
+						if(aux==2 || j==49){
+							listaEquipes[i].pais[k] = '\0';
+							aux=3;
+						}else{
+							if(buffer==' '){
+								aux++;
+							}else{
+								aux=0;
+							}
+							listaEquipes[i].pais[k] = buffer;
+							k++;
+						}
+					}
+				}
+			}
+		}
+		fclose(arquivo);
+	}
+	return qtdRegistros;
+}
 

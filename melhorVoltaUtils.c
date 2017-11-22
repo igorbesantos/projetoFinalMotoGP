@@ -9,6 +9,7 @@ typedef struct {
 //Protótipos
 void cadastraMelhorVolta();
 void gravarMelhorVolta(melhorVolta *volta, int flagReceberFeedback);
+int buscaMelhoresVoltas(melhorVolta listaVoltas[]);
 
 //Implementações
 
@@ -97,5 +98,67 @@ void gravarMelhorVolta(melhorVolta *volta, int flagReceberFeedback){
 		system("pause");
 		system("cls");
 	}
+}
+
+int buscaMelhoresVoltas(melhorVolta listaVoltas[]){
+	FILE* arquivo;
+	int qtdRegistros=0, i=0, j=0, k=0, aux=0;
+	char buffer;
+	
+	qtdRegistros = qtdRegistrosArquivo("database/voltas.txt");
+	
+	if(arquivo = fopen("database/voltas.txt", "rt")){
+		for(i=0; i<qtdRegistros; i++){
+			k=0;
+			aux=0;
+			listaVoltas[i].idPiloto = 0;
+			listaVoltas[i].idCircuito = 0;
+			for(j=0; j<=27; j++){
+				buffer = fgetc(arquivo);
+				if(j<3){
+					converteCharParaInt(&aux, buffer);
+					switch(j){
+					case 0:
+						listaVoltas[i].idPiloto += aux*100;
+						break;
+					case 1:
+						listaVoltas[i].idPiloto += aux*10;
+						break;
+					case 2:
+						listaVoltas[i].idPiloto += aux;
+						aux = 0;
+						break;
+					}
+				}else if(j<8){
+					converteCharParaInt(&aux, buffer);
+					switch(j){
+					case 4:
+						listaVoltas[i].idCircuito += aux*100;
+						break;
+					case 5:
+						listaVoltas[i].idCircuito += aux*10;
+						break;
+					case 6:
+						listaVoltas[i].idCircuito += aux;
+						aux = 0;
+						break;
+					}
+				}else if(j<18){
+					listaVoltas[i].data[k] = buffer;
+					k++;
+				}else if(j==18){
+					listaVoltas[i].data[k]= '\0';
+					k=0;
+				}else if(j<27){
+					listaVoltas[i].tempo[k] = buffer;
+					k++;
+				}else if(j==27){
+					listaVoltas[i].tempo[k] = '\0';
+				}
+			}
+		}
+		fclose(arquivo);
+	}
+	return qtdRegistros;
 }
 
