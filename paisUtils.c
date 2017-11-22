@@ -106,7 +106,7 @@ int getListaPaises(int flagRetornarSiglas, char listaSiglas[][4], int flagRetorn
 	fflush(stdin);
 	qtdRegistros = qtdRegistrosArquivo("database/paises.txt");
 	if(qtdRegistros>0){
-		arquivo = fopen("database/paises.txt", "r");
+		arquivo = fopen("database/paises.txt", "rt");
 		for(i=0; i<qtdRegistros; i++){
 			fgets(buffer, 100, arquivo);
 			if(flagRetornarSiglas){

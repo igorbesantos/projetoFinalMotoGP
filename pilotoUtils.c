@@ -16,6 +16,7 @@ int leValidaIdPiloto();
 void alterarPiloto();
 void excluirPiloto();
 void gravarPiloto(piloto *novoPiloto, int flagReceberFeedback);
+int buscaPilotos(piloto listaPilotos[]);
 
 //Implementações
 
@@ -170,5 +171,86 @@ void excluirPiloto(){
 	//TODO
 }
 
-
+int buscaPilotos(piloto listaPilotos[]){
+	FILE* arquivo;
+	char buffer;
+	int qtdRegistros=0, i=0, j=0, k=0, aux=0;
+	
+	qtdRegistros = qtdRegistrosArquivo("database/pilotos.txt");
+	
+	if(arquivo = fopen("database/pilotos.txt", "rt")){
+		for(i=0; i<qtdRegistros; i++){
+			k=0;
+			aux=0;
+			listaPilotos[i].id = 0;
+			for(j=0; j<=122; j++){
+				buffer = fgetc(arquivo);
+				if(j<4){
+					converteCharParaInt(&aux, buffer);
+					switch(j){
+					case 0:
+						listaPilotos[i].id += aux*100;
+						break;
+					case 1:
+						listaPilotos[i].id += aux*10;
+						break;
+					case 2:
+						listaPilotos[i].id += aux;
+						aux = 0;
+						break;
+					}
+				}else if(j<54){
+					if(aux<3){
+						if(aux==2 || j==53){
+							listaPilotos[i].nome[k] = '\0';
+							aux=3;
+						}else{
+							if(buffer==' '){
+								aux++;
+							}else{
+								aux=0;
+							}
+							listaPilotos[i].nome[k] = buffer;
+							k++;
+						}
+					}
+				}else if(j==54){
+					k=0;
+					aux=0;
+				}else if(j<58){
+					listaPilotos[i].siglaEquipe[k] = buffer;
+					k++;
+				}else if(j==58){
+					k=0;
+					listaPilotos[i].siglaEquipe[3]='\0';
+				}else if(j<69){
+					listaPilotos[i].dataNasc[k] = buffer;
+					k++;
+				}else if(j==69){
+					listaPilotos[i].dataNasc[11] = '\0';
+					k=0;
+				}else if(j==70){
+					listaPilotos[i].sexo = buffer;
+				}else if(j>71){
+					if(aux<3){
+						if(aux==2 || j==120){
+							listaPilotos[i].pais[k] = '\0';
+							aux=3;
+						}else{
+							if(buffer==' '){
+								aux++;
+							}else{
+								aux=0;
+							}
+							listaPilotos[i].pais[k] = buffer;
+							k++;
+						}
+					}
+				}
+			}
+		}
+		fclose(arquivo);
+	}
+	return qtdRegistros;
+}
 

@@ -179,3 +179,6 @@ int leEquipe(int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome,
 	}
 	return resultado;
 }
+
+
+
