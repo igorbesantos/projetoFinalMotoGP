@@ -21,7 +21,7 @@
 #include "pilotoUtils.c"
 #include "circuitoUtils.c"
 #include "melhorVoltaUtils.c"
-
+#include "Relatorios.c"
 
 
 int main() {
@@ -105,6 +105,8 @@ int main() {
 				switch(opcao){
 					case '1':
 						//TODO Rel1
+						leRelatorio1(1);
+						
 						break;
 					case '2':
 						//TODO Rel2
