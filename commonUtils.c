@@ -9,6 +9,7 @@ int aleatorio(int min, int max);
 int qtdRegistrosArquivo(char *caminhoArquivo);
 int isIntNaLista(int numero, int lista[], int tamLista);
 void converteCharParaInt(int *destino, char entrada);
+int isCodIgual(char cod1[], char cod2[], int tam);
 
 //Implementações
 
@@ -215,3 +216,18 @@ void converteCharParaInt(int *destino, char entrada){
 			*destino = -1;
 	}
 }
+
+int isCodIgual(char cod1[], char cod2[], int tam){
+	int i=0;
+	
+	if(toupper(cod1[0])==toupper(cod2[0])){
+		if(toupper(cod1[1])==toupper(cod2[1])){
+			if(toupper(cod1[2])==toupper(cod2[2])){
+				return 1;
+			}
+		}
+	}
+	
+	return 0;
+}
+

@@ -11,10 +11,11 @@ int getListaSiglasEquipe(char lista[][4]);
 int isSiglaEquipeCadastrada(char *sigla);
 void leValidaSiglaEquipe(char *destino);
 void cadastrarEquipe();
-void salvarEquipe(equipe *nova);
+void salvarEquipe(equipe *nova, int receberFeedback);
 int getListaEquipes(int flagRetornarSiglas, char listaSiglas[][4], int flagRetornarNomes, char listaNomes[][TAM_NOME]);
 int leEquipe(int flagRetornaSigla, char *sigla, int flagRetornaNome, char *nome, char *mensagem);
 int buscaEquipes(equipe listaEquipes[]);
+void excluirEquipe();
 
 //Implementações
 
@@ -78,23 +79,28 @@ void cadastrarEquipe(){
 	leValidaNome("Informe o nome da equipe:\n", nova.nome);
 	leValidaSiglaEquipe(nova.sigla);
 	lePais(0, " ", 1, nova.pais, "Informe a sigla do pais da equipe:\n");
-	salvarEquipe(&nova);
+	salvarEquipe(&nova, 1);
 }
 
-void salvarEquipe(equipe *nova){
+void salvarEquipe(equipe *nova, int receberFeedback){
 	FILE* arquivo;
 	
 	fflush(stdin);
 	if(arquivo = fopen("database/equipes.txt", "a")){
 		fprintf(arquivo, "%-50s %-3s %-50s\n", nova[0].nome, nova[0].sigla, nova[0].pais);
 		fclose(arquivo);
-		
-		printf("Equipe cadastrada com sucesso!\nNome: %s\nSigla: %s\nPais: %s\n", nova[0].nome, nova[0].sigla, nova[0].pais);
+		if(receberFeedback){
+			printf("Equipe cadastrada com sucesso!\nNome: %s\nSigla: %s\nPais: %s\n", nova[0].nome, nova[0].sigla, nova[0].pais);
+		}
 	}else{
-		printf("Nao foi possivel cadastrar a equipe!\n");
+		if(receberFeedback){
+			printf("Nao foi possivel cadastrar a equipe!\n");
+		}
 	}
-	system("pause");
-	system("cls");
+	if(receberFeedback){
+		system("pause");
+		system("cls");
+	}
 }
 
 int getListaEquipes(int flagRetornarSiglas, char listaSiglas[][4], int flagRetornarNomes, char listaNomes[][TAM_NOME]){
@@ -239,5 +245,78 @@ int buscaEquipes(equipe listaEquipes[]){
 		fclose(arquivo);
 	}
 	return qtdRegistros;
+}
+
+void excluirEquipe(){
+	char opcao, msgConfirmacao[150], siglaEquipe[4], menu[150] = "Escolha uma opcao:\n1-Ver lista de equipes cadastradas\n2-Excluir equipe por sigla\n\n0-Voltar";
+	equipe listaEquipes[101];
+	int qtdEquipesCadastradas=0, i=0;
+	FILE* arquivo;
+	equipe *equipePointer;
+	
+	qtdEquipesCadastradas = buscaEquipes(listaEquipes);
+	
+	do{
+		opcao = leValidaOpcao('0', '2', menu);
+		switch(opcao){
+		case '1':
+			for(i=0; i<qtdEquipesCadastradas; i++){
+				printf("%3s - %s\n", listaEquipes[i].sigla, listaEquipes[i].nome);
+			}
+			system("pause");
+			system("cls");
+			break;
+		case '2':
+			do{
+				fflush(stdin);
+				leValidaNome("Informe a sigla da equipe que sera excluida:\n", siglaEquipe);
+				system("cls");
+				if(strlen(siglaEquipe)!=3){
+					printf("Sigla de equipe deve conter 3 caracteres!\n");
+				}
+				if(siglaEquipe[1]==' '){
+					printf("Sigla não pode conter espacos em branco!\n");
+				}
+			}while(strlen(siglaEquipe)!=3 || siglaEquipe[1]==' ');
+		
+			if(isSiglaEquipeCadastrada(siglaEquipe) && !qtdPilotosCadastrados(siglaEquipe)){
+				if(remove("database/equipes.txt") == 0){
+					for(i=0; i<qtdEquipesCadastradas; i++){
+						if(!isCodIgual(siglaEquipe, listaEquipes[i].sigla, 3)){
+							equipePointer = &listaEquipes[i];
+							salvarEquipe(equipePointer, 0);
+						}else{
+							sprintf(msgConfirmacao,"Deseja excluir a equipe %s ?\n1-Sim\n2-Nao", listaEquipes[i].nome);
+							opcao = leValidaOpcao('1', '2', msgConfirmacao);
+							switch(opcao){
+							case '1':
+								printf("Equipe %s excluida com sucesso!\n", listaEquipes[i].nome);
+								system("pause");
+								system("cls");
+								break;
+							case '2':
+								equipePointer = &listaEquipes[i];
+								salvarEquipe(equipePointer, 0);
+								printf("Exclusao cancelada!\n");
+								system("pause");
+								system("cls");
+								break;
+							}
+							opcao = '0';
+						}
+					}
+				}else{
+					printf("Nao foi possivel excluir a equipe!\n");
+					system("pause");
+					system("cls");
+				}
+			}else{
+				printf("Sigla de equipe nao encontrada!\n");
+				system("pause");
+				system("cls");
+			}
+			break;
+		}
+	}while(opcao!='0');
 }
 

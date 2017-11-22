@@ -10,6 +10,7 @@ typedef struct {
 void cadastraMelhorVolta();
 void gravarMelhorVolta(melhorVolta *volta, int flagReceberFeedback);
 int buscaMelhoresVoltas(melhorVolta listaVoltas[]);
+int qtdVoltasRealizadas(int idPiloto);
 
 //Implementações
 
@@ -160,5 +161,20 @@ int buscaMelhoresVoltas(melhorVolta listaVoltas[]){
 		fclose(arquivo);
 	}
 	return qtdRegistros;
+}
+
+int qtdVoltasRealizadas(int idPiloto){
+	int totalVoltas=0, voltasPiloto=0, i=0;
+	melhorVolta listaVoltas[MAX_MELHORES_VOLTAS];
+	
+	totalVoltas = buscaMelhoresVoltas(listaVoltas);
+	
+	for(i=0; i<totalVoltas; i++){
+		if(idPiloto == listaVoltas[i].idPiloto){
+			voltasPiloto++;
+		}
+	}
+	
+	return voltasPiloto;
 }
 

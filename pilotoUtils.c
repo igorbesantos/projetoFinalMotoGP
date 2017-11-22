@@ -17,6 +17,7 @@ void alterarPiloto();
 void excluirPiloto();
 void gravarPiloto(piloto *novoPiloto, int flagReceberFeedback);
 int buscaPilotos(piloto listaPilotos[]);
+int qtdPilotosCadastrados(char siglaEquipe[]);
 
 //Implementações
 
@@ -152,23 +153,86 @@ void cadastrarPiloto(){
 }
 
 void alterarPiloto(){
-	char opcao, menu[200] = "Escolha uma opcao:\n1-Ver lista de pilotos cadastrados\n2-Alterar piloto por código";
+	char opcao, menu[150] = "Escolha uma opcao:\n1-Ver lista de pilotos cadastrados\n2-Alterar piloto por codigo\n\n0-Voltar";
 	
 	do{
-		opcao = leValidaOpcao('1','2', menu);
+		opcao = leValidaOpcao('0','2', menu);
 		switch(opcao){
-			case '1':
-				//TODO
-				break;
-			case '2':
-				//TODO
-				break;
+		case '1':
+			//TODO
+			break;
+		case '2':
+			//TODO
+			break;
 		}
-	}while(opcao='1');
+	}while(opcao!='0');
 }
 
 void excluirPiloto(){
-	//TODO
+	char opcao, msgConfirmacao[150], menu[150] = "Escolha uma opcao:\n1-Ver lista de pilotos cadastrados\n2-Excluir piloto por codigo\n\n0-Voltar";
+	piloto listaPilotos[101];
+	int qtdPilotosCadastrados=0, i=0, isIdPilotoCadastrado=0, idPiloto=0;
+	FILE* arquivo;
+	piloto *pilotoPointer;
+	
+	qtdPilotosCadastrados = buscaPilotos(listaPilotos);
+	
+	do{
+		opcao = leValidaOpcao('0', '2', menu);
+		switch(opcao){
+		case '1':
+			for(i=0; i<qtdPilotosCadastrados; i++){
+				printf("%03d - %s\n", listaPilotos[i].id, listaPilotos[i].nome);
+			}
+			system("pause");
+			system("cls");
+			break;
+		case '2':
+			idPiloto = leValidaInteiro(0,100, "Informe o codigo/numero do piloto a ser excluido: ");
+			for(i=0; i<qtdPilotosCadastrados; i++){
+				if(idPiloto == listaPilotos[i].id){
+					isIdPilotoCadastrado = 1;
+				}
+			}
+			if(isIdPilotoCadastrado && !qtdVoltasRealizadas(idPiloto)){
+				if(remove("database/pilotos.txt") == 0){
+					for(i=0; i<qtdPilotosCadastrados; i++){
+						if(idPiloto != listaPilotos[i].id){
+							pilotoPointer = &listaPilotos[i];
+							gravarPiloto(pilotoPointer, 0);
+						}else{
+							sprintf(msgConfirmacao,"Deseja excluir o piloto %s ?\n1-Sim\n2-Nao", listaPilotos[i].nome);
+							opcao = leValidaOpcao('1', '2', msgConfirmacao);
+							switch(opcao){
+							case '1':
+								printf("Piloto %s excluido com sucesso!", listaPilotos[i].nome);
+								system("pause");
+								system("cls");
+								break;
+							case '2':
+								pilotoPointer = &listaPilotos[i];
+								gravarPiloto(pilotoPointer, 0);
+								printf("Exclusao cancelada!\n");
+								system("pause");
+								system("cls");
+								break;
+							}
+							opcao = '0';
+						}
+					}
+				}else{
+					printf("Nao foi possivel excluir o piloto!\n");
+					system("pause");
+					system("cls");
+				}
+			}else{
+				printf("Codigo/numero de piloto nao encontrado!\n");
+				system("pause");
+				system("cls");
+			}
+			break;
+		}
+	}while(opcao!='0');
 }
 
 int buscaPilotos(piloto listaPilotos[]){
@@ -254,3 +318,16 @@ int buscaPilotos(piloto listaPilotos[]){
 	return qtdRegistros;
 }
 
+int qtdPilotosCadastrados(char siglaEquipe[]){
+	int i=0, totalPilotos=0, qtdPilotosNaEquipe=0;
+	piloto listaPilotos[101];
+	
+	totalPilotos = buscaPilotos(listaPilotos);
+	
+	for(i=0; i<totalPilotos; i++){
+		if(isCodIgual(siglaEquipe, listaPilotos[i].siglaEquipe, 3)){
+			qtdPilotosNaEquipe++;
+		}
+	}
+	return qtdPilotosNaEquipe;
+}
