@@ -8,6 +8,7 @@
 #include <ctype.h>
 #include <time.h>
 
+
 #define TAM_NOME 50
 #define MAX_EQUIPES 50
 #define MAX_CIRCUITOS 50
