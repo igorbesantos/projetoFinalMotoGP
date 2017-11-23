@@ -18,6 +18,7 @@ void excluirPiloto();
 void gravarPiloto(piloto *novoPiloto, int flagReceberFeedback);
 int buscaPilotos(piloto listaPilotos[]);
 int qtdPilotosCadastrados(char siglaEquipe[]);
+void trocaPilotos(piloto *p1, piloto *p2);
 
 //Implementações
 
@@ -330,4 +331,45 @@ int qtdPilotosCadastrados(char siglaEquipe[]){
 		}
 	}
 	return qtdPilotosNaEquipe;
+}
+
+void ordenaListaPilotos(int qtdPilotos, piloto listaPilotos[]){
+	int i=0, j=0, posicao=0;
+	
+	for(i=0; i<(qtdPilotos-1); i++){
+		posicao=i;
+		for(j=i+1; j<qtdPilotos; j++){
+			if(comparaNomes(listaPilotos[i].nome, listaPilotos[j].nome)>0){
+				posicao = j;
+			}
+		}
+		if(posicao != i){
+			trocaPilotos(&listaPilotos[i], &listaPilotos[j]);
+		}
+	}
+}
+
+void trocaPilotos(piloto *p1, piloto *p2){
+	piloto t;
+	
+	t.dataNasc = *p1.dataNasc;
+	t.id = *p1.id;
+	t.nome = *p1.nome;
+	t.pais = *p1.pais;
+	t.sexo = *p1.sexo;
+	t.siglaEquipe = *p1.siglaEquipe;
+	
+	*p1.dataNasc = *p2.dataNasc;
+	*p1.id = *p2.id;
+	*p1.nome = *p2.nome;
+	*p1.pais = *p2.pais;
+	*p1.sexo = *p2.sexo;
+	*p1.siglaEquipe = *p2.siglaEquipe;
+	
+	*p2.dataNasc = t.dataNasc;
+	*p2.id = t.id;
+	*p2.nome = t.nome;
+	*p2.pais = t.pais;
+	*p2.sexo = t.sexo;
+	*p2.siglaEquipe = t.siglaEquipe;
 }

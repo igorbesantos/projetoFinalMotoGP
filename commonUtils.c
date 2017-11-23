@@ -11,6 +11,7 @@ int isIntNaLista(int numero, int lista[], int tamLista);
 void converteCharParaInt(int *destino, char entrada);
 void converteCharParaFloat(float *destino, char entrada);
 int isCodIgual(char cod1[], char cod2[], int tam);
+int comparaNomes(char nome1[], char nome2[]);
 
 //Implementações
 
@@ -267,5 +268,16 @@ int isCodIgual(char cod1[], char cod2[], int tam){
 	}
 	
 	return 0;
+}
+
+int comparaNomes(char nome1[], char nome2[]){
+	int resposta=0, i==0;
+	
+	while(resposta==0){
+		resposta = toupper(nome1[i]) - toupper(nome2[i]);
+		i++;
+	}
+	
+	return resposta
 }
 
