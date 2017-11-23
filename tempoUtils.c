@@ -42,16 +42,16 @@ void recuperaTempoDeString(int *min, int  *seg, int *milis, char tempoFormatado[
 			*min += aux;
 			break;
 		case 3:
-			seg += aux*10;
+			*seg += aux*10;
 			break;
 		case 4:
-			seg += aux;
+			*seg += aux;
 			break;
 		case 6:
-			milis += aux*10;
+			*milis += aux*10;
 			break;
 		case 7:
-			milis += aux;
+			*milis += aux;
 			break;
 		}
 	}
