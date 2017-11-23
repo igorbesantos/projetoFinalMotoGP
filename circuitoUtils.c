@@ -11,6 +11,7 @@ typedef struct {
 void cadastrarCircuito();
 int getListaCircuitos(int flagRetornarCod, int listaCod[], int flagRetornarNomes, char listaNomes[][TAM_NOME]);
 void gravarCircuito(circuito *novo, int flagReceberFeedback);
+int buscaCircuitos(circuito listaCircuitos[]);
 
 //Implementações
 void cadastrarCircuito(){
@@ -155,6 +156,7 @@ int buscaCircuitos(circuito listaCircuitos[]){
 						}
 					}
 				}else if(j==54){
+					listaCircuitos[i].nome[k] = '\0';
 					aux=0;
 					k=0;
 				}else if(j<55){
@@ -173,6 +175,7 @@ int buscaCircuitos(circuito listaCircuitos[]){
 						}
 					}
 				}else if(j==55){
+					listaCircuitos[i].pais[k] = '\0';
 					aux=0;
 					k=0;
 				}else if(j<64){
