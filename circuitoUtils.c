@@ -142,7 +142,7 @@ int buscaCircuitos(circuito listaCircuitos[]){
 					aux=0;
 				}else if(j<54){
 					if(aux<3){
-						if(aux==2 || j==49){
+						if(aux==2 || j==53){
 							listaCircuitos[i].nome[k] = '\0';
 							aux=3;
 						}else{
@@ -159,9 +159,9 @@ int buscaCircuitos(circuito listaCircuitos[]){
 					listaCircuitos[i].nome[k] = '\0';
 					aux=0;
 					k=0;
-				}else if(j<55){
+				}else if(j<105){
 					if(aux<3){
-						if(aux==2 || j==49){
+						if(aux==2 || j==104){
 							listaCircuitos[i].pais[k] = '\0';
 							aux=3;
 						}else{
@@ -174,33 +174,33 @@ int buscaCircuitos(circuito listaCircuitos[]){
 							k++;
 						}
 					}
-				}else if(j==55){
+				}else if(j==105){
 					listaCircuitos[i].pais[k] = '\0';
 					aux=0;
 					k=0;
-				}else if(j<64){
+				}else if(j<114){
 					converteCharParaFloat(&faux, buffer);
 					switch(j){
-					case 57:
+					case 106:
 						listaCircuitos[i].tamanho += faux*1000.0;
 						break;
-					case 58:
+					case 107:
 						listaCircuitos[i].tamanho += faux*100.0;
 						break;
-					case 59:
+					case 109:
 						listaCircuitos[i].tamanho += faux*10.0;
 						break;
-					case 60:
+					case 110:
 						listaCircuitos[i].tamanho += faux;
 						break;
-					case 62:
+					case 112:
 						listaCircuitos[i].tamanho += faux/10.0;
 						break;
-					case 63:
+					case 113:
 						listaCircuitos[i].tamanho += faux/100.0;
 						break;
 					}
-				}else if(j==64){
+				}else if(j==114){
 					faux=0.0;
 					if(buffer!='\n'){
 						isMelhorTempoCadastrado = 1;
@@ -208,32 +208,32 @@ int buscaCircuitos(circuito listaCircuitos[]){
 				}else if(isMelhorTempoCadastrado){
 					converteCharParaInt(&aux, buffer);
 					switch(j){
-					case 65:
+					case 115:
 						listaCircuitos[i].menorTempo.minutos += aux*10;
 						break;
-					case 66:
+					case 116:
 						listaCircuitos[i].menorTempo.minutos += aux;
 						break;
-					case 68:
+					case 118:
 						listaCircuitos[i].menorTempo.segundos += aux*10;
 						break;
-					case 69:
+					case 119:
 						listaCircuitos[i].menorTempo.segundos += aux;
 						break;
-					case 71:
+					case 121:
 						listaCircuitos[i].menorTempo.milisegundos += aux*10;
 						break;
-					case 72:
+					case 122:
 						listaCircuitos[i].menorTempo.milisegundos += aux;
 						break;
-					case 74:
+					case 124:
 						listaCircuitos[i].idPilotoMenorTempo=0;
 						listaCircuitos[i].idPilotoMenorTempo += aux*100;
 						break;
-					case 75:
+					case 125:
 						listaCircuitos[i].idPilotoMenorTempo += aux*10;
 						break;
-					case 76:
+					case 126:
 						listaCircuitos[i].idPilotoMenorTempo += aux;
 						break;
 					}
