@@ -12,6 +12,7 @@ void gravarMelhorVolta(melhorVolta *volta, int flagReceberFeedback);
 int buscaMelhoresVoltas(melhorVolta listaVoltas[]);
 int qtdVoltasRealizadas(int idPiloto);
 void verificaMelhorVoltaCircuito(int idCircuito, char tempoPiloto[], int idPiloto);
+void excluirMelhorVolta();
 
 //Implementações
 
@@ -207,6 +208,56 @@ void verificaMelhorVoltaCircuito(int idCircuito, char tempoPiloto[], int idPilot
 			}
 		}
 	}
+}
+
+void alterarMelhorVolta(){
+	char opcao, msgConfirmacao[250];
+	melhorVolta listaVoltas[MAX_MELHORES_VOLTAS];
+	piloto listaPilotos[101];
+	circuito listaCircuitos[MAX_CIRCUITOS];
+	int qtdVoltasCadastrados=0, qtdCircuitosCadastrados, qtdPilotos=0, flagIsCadastrado=0, idPiloto=0, codCircuito=0, i=0, min=0, seg=0, milis=0;
+	FILE* arquivo;
+	
+	qtdVoltasCadastrados = buscaMelhoresVoltas(listaVoltas);
+	qtdPilotos = buscaPilotos(listaPilotos);
+	qtdCircuitosCadastrados = buscaCircuitos(listaCircuitos);
+	fflush(stdin);
+	do{
+		idPiloto = leValidaInteiro(0,100, "Informe o codigo/numero do piloto para consultar as voltas: ");
+		for(i=0; i<qtdPilotos; i++){
+			if(idPiloto == listaPilotos[i].id){
+				flagIsCadastrado = 1;
+			}
+		}
+	}while(!flagIsCadastrado);
+	fflush(stdin);
+	flagIsCadastrado=0;
+	do{
+		codCircuito = leValidaInteiro(0,999, "Informe o codigo do circuito para consultar as voltas: ");
+		for(i=0; i<qtdCircuitosCadastrados; i++){
+			if(codCircuito == listaCircuitos[i].id){
+				flagIsCadastrado = 1;
+			}
+		}
+	}while(!flagIsCadastrado);
+	remove("database/voltas.txt");
+	
+	for(i=0; i<qtdVoltasCadastrados; i++){
+		if(listaVoltas[i].idCircuito==codCircuito && listaVoltas[i].idPiloto==idPiloto){
+			sprintf(msgConfirmacao, "Deseja alterar a volta de %s em %s ?\n1-Sim\n2-Nao", listaVoltas[i].tempo, listaVoltas[i].data);
+			opcao = leValidaOpcao('1', '2', msgConfirmacao);
+			if(opcao=='2'){
+				min = leValidaInteiro(1,59, "Informe os minutos do melhor tempo do piloto (Min: 1 minuto):");
+				seg = leValidaInteiro(0,59, "Informe os segundos do melhor tempo do piloto:");
+				milis = leValidaInteiro(0,99, "Informe os milissegundos do melhor tempo do piloto:");
+				sprintf(listaVoltas[i].tempo, "%02d:%02d:%02d", min, seg, milis);
+				
+				gravarMelhorVolta(&listaVoltas[i], 0);
+			}
+		}else{
+			gravarMelhorVolta(&listaVoltas[i], 0);
+		}
+	}	
 }
 
 void excluirMelhorVolta(){
