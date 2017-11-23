@@ -68,7 +68,7 @@ void leRelatorio1 (int opcao){
 			}else{
 				printf("%-15s%-30s%-20s%-11s%-15s%-21s\n", "ID Circuito", "Nome", "Pais", "Tamanho", "Menor Tempo", "ID Piloto menor tempo");
 				for(cont = 0; cont < qtdCircuitos; cont++){
-					printf("%-15d%-30s%-20s%-11.2f%-15d:%d:%d%-21d\n", circuitos[cont].id, circuitos[cont].nome, circuitos[cont].pais, circuitos[cont].menorTempo.minutos,
+					printf("%-15d%-30s%-20s%-11.2f%-15d:%d:%d%-21d\n", circuitos[cont].id, circuitos[cont].nome, circuitos[cont].pais, circuitos[cont].tamanho,circuitos[cont].menorTempo.minutos,
 					circuitos[cont].menorTempo.segundos, circuitos[cont].menorTempo.milisegundos, circuitos[cont].idPilotoMenorTempo);
 				}
 			}
@@ -218,7 +218,6 @@ void leRelatorio3(int opcao){
 					flag = 0;
 				}
 			}
-			
 			if(flag == 1){
 				printf("%-13s%-15s%-15s%-9s\n", "ID Piloto", "ID Circuito", "Data", "Tempo");
 				for(cont = 0; cont < qtdMelhoresVoltas; cont++){
