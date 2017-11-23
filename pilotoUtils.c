@@ -351,25 +351,25 @@ void ordenaListaPilotos(int qtdPilotos, piloto listaPilotos[]){
 
 void trocaPilotos(piloto *p1, piloto *p2){
 	piloto t;
+
+	strcpy(t.dataNasc, p1[0].dataNasc);
+	t.id = p1[0].id;
+	strcpy(t.nome, p1[0].nome);
+	strcpy(t.pais, p1[0].pais);
+	t.sexo = p1[0].sexo;
+	strcpy(t.siglaEquipe, p1[0].siglaEquipe);
 	
-	t.dataNasc = *p1.dataNasc;
-	t.id = *p1.id;
-	t.nome = *p1.nome;
-	t.pais = *p1.pais;
-	t.sexo = *p1.sexo;
-	t.siglaEquipe = *p1.siglaEquipe;
+	strcpy(p1[0].dataNasc, p2[0].dataNasc);
+	p1[0].id = p2[0].id;
+	strcpy(p1[0].nome, p2[0].nome);
+	strcpy(p1[0].pais, p2[0].pais);
+	p1[0].sexo = p2[0].sexo;
+	strcpy(p1[0].siglaEquipe, p2[0].siglaEquipe);
 	
-	*p1.dataNasc = *p2.dataNasc;
-	*p1.id = *p2.id;
-	*p1.nome = *p2.nome;
-	*p1.pais = *p2.pais;
-	*p1.sexo = *p2.sexo;
-	*p1.siglaEquipe = *p2.siglaEquipe;
-	
-	*p2.dataNasc = t.dataNasc;
-	*p2.id = t.id;
-	*p2.nome = t.nome;
-	*p2.pais = t.pais;
-	*p2.sexo = t.sexo;
-	*p2.siglaEquipe = t.siglaEquipe;
+	strcpy(p2[0].dataNasc, t.dataNasc);
+	p2[0].id = t.id;
+	strcpy(p2[0].nome, t.nome);
+	strcpy(p2[0].pais, t.pais);
+	p2[0].sexo = t.sexo;
+	strcpy(p2[0].siglaEquipe, t.siglaEquipe);
 }

@@ -271,13 +271,13 @@ int isCodIgual(char cod1[], char cod2[], int tam){
 }
 
 int comparaNomes(char nome1[], char nome2[]){
-	int resposta=0, i==0;
+	int resposta=0, i=0;
 	
 	while(resposta==0){
 		resposta = toupper(nome1[i]) - toupper(nome2[i]);
 		i++;
 	}
 	
-	return resposta
+	return resposta;
 }
 
