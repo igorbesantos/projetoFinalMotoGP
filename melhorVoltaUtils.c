@@ -13,6 +13,7 @@ int buscaMelhoresVoltas(melhorVolta listaVoltas[]);
 int qtdVoltasRealizadas(int idPiloto);
 void verificaMelhorVoltaCircuito(int idCircuito, char tempoPiloto[], int idPiloto);
 void excluirMelhorVolta();
+void alterarMelhorVolta();
 
 //Implementações
 
