@@ -123,7 +123,7 @@ int buscaCircuitos(circuito listaCircuitos[]){
 			listaCircuitos[i].menorTempo.segundos = 0;
 			listaCircuitos[i].menorTempo.milisegundos = 0;
 			listaCircuitos[i].idPilotoMenorTempo = -1;
-			for(j=0; j<=MAX_CIRCUITOS; j++){
+			for(j=0; j<=127; j++){
 				buffer = fgetc(arquivo);
 				if(j<3){
 					converteCharParaInt(&aux, buffer);
