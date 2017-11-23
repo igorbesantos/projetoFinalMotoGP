@@ -1,2 +1,5 @@
 002 Pedro                                              tbs 22/09/1985 M Brasil                                            
 000 Rubinho                                            FeR 02/07/1972 M Brasil                                            
+004 Piloto de testes                                   FeR 03/07/1990 M Estados Unidos                                    
+005 Guilherme Oliveira                                 TBS 06/05/1984 M Anguilla                                          
+006 Joana Ferraz                                       TBS 24/02/1990 F Argentina                                         
