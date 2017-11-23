@@ -37,6 +37,7 @@ int main() {
 	char menu2[300] = "RELATORIOS\n\n1-Consulta em todos arquivos\n2-Pesquisar pilotos por nome\n3-Relacionar pilotos por circuito\n4-Consultar circuitos\n5-Consultar pilotos por equipe\n6-Pesquisar volta por tempo\n7-Consultar registros nao relacionados a nenhuma volta\n\n0-Voltar";
 	char menuRel1[120] = "Relatorio 1\n1-Pesquisa piloto\n2-Arquivo pilotos.txt\n3-Arquivo equipes.txt\n4-Arquivo circuitos.txt\n5-Arquivo voltas.txt.";
 	char menuRel2[100] = "Relatorio 3\nPesquisar melhor volta por: \n1-ID do circuito.\n2-Data.";
+	char menuRel7[100] = "Relatorio 7\n1-Pilotos.\n2-Equipes.\n3-Circuitos";
 	char opcao;
 	int encerrarPrograma = 0;
 	
@@ -135,7 +136,8 @@ int main() {
 						break;
 					case '7':
 						//TODO Rel7
-						leRelatorio7();
+						opcao = leValidaOpcao('1', '3', menuRel7);
+						leRelatorio7(opcao);
 						break;
 				}
 				break;
