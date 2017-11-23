@@ -75,7 +75,7 @@ void cadastraMelhorVolta(){
 	
 	seg = leValidaInteiro(0,59, "Informe os segundos do melhor tempo do piloto:");
 	
-	milis - leValidaInteiro(0,59, "Informe os milissegundos do melhor tempo do piloto:");
+	milis = leValidaInteiro(0,99, "Informe os milissegundos do melhor tempo do piloto:");
 	
 	sprintf(nova.tempo, "%02d:%02d:%02d", min, seg, milis);
 	
