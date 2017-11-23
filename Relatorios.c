@@ -278,13 +278,15 @@ void leRelatorio5(){
 	.
 */
 void leRelatorio6(){
-	int min = 0, seg = 0, milis = 0, flag = 0, cont = 0, cont2 = 0;
-	int minAux = 0, segAux = 0, milisAux = 0, qtdMelhoresVoltas = 0, qtdPilotos = 0; 
+	int min = 0, seg = 0, milis = 0, flag = 0, cont = 0, cont2 = 0, cont3 = 0;
+	int minAux = 0, segAux = 0, milisAux = 0, qtdMelhoresVoltas = 0, qtdPilotos = 0, qtdCircuitos = 0; 
 	piloto piloto[QTD_PILOTO];
 	melhorVolta melhoresVoltas[MAX_MELHORES_VOLTAS];
+	circuito circuitos[MAX_CIRCUITOS];
 	
 	qtdMelhoresVoltas = buscaMelhoresVoltas(melhoresVoltas);
 	qtdPilotos = buscaPilotos(piloto);
+//	qtdCircuitos = buscaCircuitos(circuitos);
 	
 	min = leValidaInteiro(1,59, "Informe os minutos do melhor tempo do piloto (Min: 1 minuto):");
 	
@@ -314,21 +316,29 @@ void leRelatorio6(){
 	}
 	
 	if(flag == 1){
-		printf("%-17s%-50s%-19s\n","Identificacao", "Nome", "Sigla da Equipe");
+		printf("%-17s%-50s%-19s%-30s\n","Identificacao", "Nome do piloto", "Sigla da Equipe", "Nome do Circuito");
 		for(cont = 0; cont < qtdMelhoresVoltas; cont++){
 			recuperaTempoDeString(&minAux, &segAux, &milisAux, melhoresVoltas[cont].tempo);
 			if(minAux <= min){
 				if(segAux <= seg){
 					if(milisAux <= milis){
 						for(cont2 = 0; cont2 < qtdPilotos; cont2++){
+							//BuscaCircuitos AQQQQQQ
 							if(melhoresVoltas[cont].idPiloto == piloto[cont2].id){
-								printf("%-17d%-50s%-19s\n", piloto[cont2].id, piloto[cont2].nome, piloto[cont2].siglaEquipe);
+								printf("%-17d%-50s%-19s", piloto[cont2].id, piloto[cont2].nome, piloto[cont2].siglaEquipe);
+								/*for(cont3 = 0; cont3 < qtdCircuitos; cont3++){
+									if(circuito[cont3].idPilotoMenorTempo == piloto[cont0].id){
+										printf("%-30s\n", circuito[cont3].nome);
+									}		
+								}*/
 							}
 						}
 					}
 				}
 			}
 		}
+		
+		
 	}else{
 		printf("Nao existe nenhum piloto de nenhuma equipe com o tempo menor ou igual ao informado!\n");	
 	}
@@ -342,6 +352,49 @@ void leRelatorio6(){
 	.
 */
 void leRelatorio7(){
+	int cont = 0, cont2 = 0, cont3 = 0, qtdCircuitos = 0, qtdMelhoresVoltas = 0, qtdPilotos = 0, pilotosOf[QTD_PILOTO], circuitosOf[MAX_CIRCUITOS], equipesOf[MAX_EQUIPES];
+	piloto piloto[QTD_PILOTO];
+	melhorVolta melhoresVoltas[MAX_MELHORES_VOLTAS];
+	circuito circuitos[MAX_CIRCUITOS];
 	
+	qtdMelhoresVoltas = buscaMelhoresVoltas(melhoresVoltas);
+	qtdPilotos = buscaPilotos(piloto);
+	for(cont = 0; cont < qtdMelhoresVoltas; cont++){
+		for(cont2 = 0; cont2 < qtdPilotos; cont2++){
+			if(piloto[cont2].id == melhoresVoltas[cont].idPiloto){
+				pilotosOf[cont] = 1;
+			}else{
+				pilotosOf[cont] = 0;
+			}
+		}
+		for(cont3 = 0; cont3 < qtdCircuitos; cont3++){
+			if(circuitos[cont3].id == melhoresVoltas[cont].idCircuito){
+				circuitosOf[cont] = 1;
+			}else{
+				circuitosOf[cont] = 0;
+			}
+		}
+	}
+	
+	printf("%s\n\n%-50s%-13s\n","+=+=+Pilotos+=+=+", "Nome", "Identificacao");
+	for(cont = 0; cont < qtdMelhoresVoltas; cont++){
+		for(cont2 = 0; cont2 < qtdPilotos; cont2++){
+			if(pilotosOf[cont2] == 0){
+				printf("%-50s%-13d\n", piloto[cont2].nome, piloto[cont].id);
+			}
+		}	
+	}
+	
+	printf("\n%s\n\n%-50s%-13s\n","+=+=+Circuitos+=+=+", "Nome", "Identificacao");
+	for(cont = 0; cont < qtdMelhoresVoltas; cont++){
+		for(cont2 = 0; cont2 < qtdPilotos; cont2++){
+			if(circuitosOf[cont2] == 0){
+				printf("%-50s%-13d\n", circuitos[cont2].nome, circuitos[cont].id);
+			}
+		}
+	}
 }
+
+
+
 
