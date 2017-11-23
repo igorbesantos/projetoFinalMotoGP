@@ -130,7 +130,7 @@ int main() {
 						break;
 					case '6':
 						//TODO Rel6
-						
+						leRelatorio6();
 						break;
 					case '7':
 						//TODO Rel7

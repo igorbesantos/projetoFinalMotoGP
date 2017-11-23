@@ -4,6 +4,11 @@
 void leRelatorio1 (int opcao);
 void leRelatorio2();
 void leRelatorio3(int opcao);
+void leRelatorio4();
+void leRelatorio5();
+void leRelatorio6();
+void leRelatorio7();
+
 //Funções
 /*1.Consulta simples sobre todos os arquivos existentes através da sua 
 	chave única ou apresentar todos os dados cadastrados
@@ -274,7 +279,7 @@ void leRelatorio5(){
 */
 void leRelatorio6(){
 	int min = 0, seg = 0, milis = 0, flag = 0, cont = 0, cont2 = 0;
-	int qtdMelhoresVoltas = 0, qtdPilotos = 0; 
+	int minAux = 0, segAux = 0, milisAux = 0, qtdMelhoresVoltas = 0, qtdPilotos = 0; 
 	piloto piloto[QTD_PILOTO];
 	melhorVolta melhoresVoltas[MAX_MELHORES_VOLTAS];
 	
@@ -287,10 +292,14 @@ void leRelatorio6(){
 	
 	milis = leValidaInteiro(0,99, "Informe os milissegundos do melhor tempo do piloto:");
 	
+	
 	for(cont = 0; cont < qtdMelhoresVoltas; cont++){
-		if(mim <= melhoresVoltas[cont].tempo.mim){
-			if(seg <= melhoresVoltas[cont].tempo.seg){
-				if(milis <= melhoresVoltas[cont].tempo.milis){
+		recuperaTempoDeString(&minAux, &segAux, &milisAux, melhoresVoltas[cont].tempo);
+		if(minAux <= min){
+			flag = 1;
+			if(segAux <= seg){
+				flag = 1;
+				if(milisAux <= milis){
 					flag = 1;
 					break;
 				}else{
@@ -305,14 +314,16 @@ void leRelatorio6(){
 	}
 	
 	if(flag == 1){
-		printf("%-17s%-50s%-19s","Identificacao", "Nome", "Sigla da Equipe");
+		printf("%-17s%-50s%-19s\n","Identificacao", "Nome", "Sigla da Equipe");
 		for(cont = 0; cont < qtdMelhoresVoltas; cont++){
-			if(mim <= melhoresVoltas[cont].tempo.mim){
-				if(seg <= melhoresVoltas[cont].tempo.seg){
-					if(milis <= melhoresVoltas[cont].tempo.milis){
-						for(cont2 = 0; cont < qtdPilotos; cont++){
-							if(melhoresVoltas[cont].idPiloto == piloto[cont].id){
-								printf("%-17d%-50s%-19s\n", piloto[cont].id, piloto[cont].nome, piloto[cont].siglaEquipe);
+			recuperaTempoDeString(&minAux, &segAux, &milisAux, melhoresVoltas[cont].tempo);
+			if(minAux <= min){
+				if(segAux <= seg){
+					if(milisAux <= milis){
+						printf("HEllo\n");
+						for(cont2 = 0; cont2 < qtdPilotos; cont2++){
+							if(melhoresVoltas[cont].idPiloto == piloto[cont2].id){
+								printf("%-17d%-50s%-19s\n", piloto[cont2].id, piloto[cont2].nome, piloto[cont2].siglaEquipe);
 							}
 						}
 					}
@@ -320,7 +331,7 @@ void leRelatorio6(){
 			}
 		}
 	}else{
-		printf("Nao existe nenhum piloto de nenhuma equipe com o tempo menor ou igual ao informado!");	
+		printf("Nao existe nenhum piloto de nenhuma equipe com o tempo menor ou igual ao informado!\n");	
 	}
 	system("pause");
 	system("cls");	
