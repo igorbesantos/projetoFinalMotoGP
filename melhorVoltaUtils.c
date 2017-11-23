@@ -11,6 +11,7 @@ void cadastraMelhorVolta();
 void gravarMelhorVolta(melhorVolta *volta, int flagReceberFeedback);
 int buscaMelhoresVoltas(melhorVolta listaVoltas[]);
 int qtdVoltasRealizadas(int idPiloto);
+void verificaMelhorVoltaCircuito(int idCircuito, char tempo[]);
 
 //Implementações
 
@@ -80,6 +81,9 @@ void cadastraMelhorVolta(){
 	sprintf(nova.tempo, "%02d:%02d:%02d", min, seg, milis);
 	
 	gravarMelhorVolta(&nova, 1);
+	
+	verificaMelhorVoltaCircuito(nova.idCircuito, nova.tempo);
+	
 	fflush(stdin);
 }
 
@@ -176,5 +180,9 @@ int qtdVoltasRealizadas(int idPiloto){
 	}
 	
 	return voltasPiloto;
+}
+
+void verificaMelhorVoltaCircuito(int idCircuito, char tempo[]){
+	//TODO
 }
 

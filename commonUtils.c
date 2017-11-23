@@ -9,6 +9,7 @@ int aleatorio(int min, int max);
 int qtdRegistrosArquivo(char *caminhoArquivo);
 int isIntNaLista(int numero, int lista[], int tamLista);
 void converteCharParaInt(int *destino, char entrada);
+void converteCharParaFloat(float *destino, char entrada);
 int isCodIgual(char cod1[], char cod2[], int tam);
 
 //Implementações
@@ -214,6 +215,43 @@ void converteCharParaInt(int *destino, char entrada){
 			break;
 		default:
 			*destino = -1;
+	}
+}
+
+void converteCharParaFloat(float *destino, char entrada){
+	switch(entrada){
+		case '0':
+			*destino = 0.0;
+			break;
+		case '1':
+			*destino = 1.0;
+			break;
+		case '2':
+			*destino = 2.0;
+			break;
+		case '3':
+			*destino = 3.0;
+			break;
+		case '4':
+			*destino = 4.0;
+			break;
+		case '5':
+			*destino = 5.0;
+			break;
+		case '6':
+			*destino = 6.0;
+			break;
+		case '7':
+			*destino = 7.0;
+			break;
+		case '8':
+			*destino = 8.0;
+			break;
+		case '9':
+			*destino = 9.0;
+			break;
+		default:
+			*destino = -1.0;
 	}
 }
 
