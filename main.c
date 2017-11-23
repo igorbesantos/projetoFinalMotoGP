@@ -10,7 +10,7 @@
 
 #define TAM_NOME 50
 #define MAX_EQUIPES 50
-#define MAX_CIRCUITOS 150
+#define MAX_CIRCUITOS 50
 #define MAX_MELHORES_VOLTAS 50
 
 #include "commonUtils.c"
@@ -95,7 +95,7 @@ int main() {
 								//TODO Alterar volta
 								break;
 							case '3':
-								//TODO Excluir volta
+								excluirMelhorVolta();
 								break;
 						}
 						break;
@@ -110,12 +110,12 @@ int main() {
 						leRelatorio1(opcao);
 						break;
 					case '2':
-						//TODO Rel2 
+						//TODO Rel2
 						//Falta ordenar alfabeticamente 
 						leRelatorio2();
 						break;
 					case '3':
-						//TODO Rel3 OKEY
+						//TODO Rel3
 						opcao = leValidaOpcao('1', '2', menuRel2);
 						leRelatorio3(opcao);
 						break;

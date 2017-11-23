@@ -11,7 +11,7 @@ void cadastraMelhorVolta();
 void gravarMelhorVolta(melhorVolta *volta, int flagReceberFeedback);
 int buscaMelhoresVoltas(melhorVolta listaVoltas[]);
 int qtdVoltasRealizadas(int idPiloto);
-void verificaMelhorVoltaCircuito(int idCircuito, char tempo[]);
+void verificaMelhorVoltaCircuito(int idCircuito, char tempoPiloto[], int idPiloto);
 
 //Implementações
 
@@ -82,7 +82,7 @@ void cadastraMelhorVolta(){
 	
 	gravarMelhorVolta(&nova, 1);
 	
-	verificaMelhorVoltaCircuito(nova.idCircuito, nova.tempo);
+	verificaMelhorVoltaCircuito(nova.idCircuito, nova.tempo, nova.idPiloto);
 	
 	fflush(stdin);
 }
@@ -182,7 +182,76 @@ int qtdVoltasRealizadas(int idPiloto){
 	return voltasPiloto;
 }
 
-void verificaMelhorVoltaCircuito(int idCircuito, char tempo[]){
-	//TODO
+void verificaMelhorVoltaCircuito(int idCircuito, char tempoPiloto[], int idPiloto){
+	tempo novo;
+	circuito listaCircuitos[MAX_CIRCUITOS];
+	int qtdCircuitos=0, i=0, j=0;
+	
+	recuperaTempoDeString(&novo.minutos, &novo.segundos, &novo.milisegundos, tempoPiloto);
+	
+	qtdCircuitos = buscaCircuitos(listaCircuitos);
+	
+	for(i=0; i<qtdCircuitos; i++){
+		if(idCircuito == listaCircuitos[i].id){
+			if(listaCircuitos[i].idPilotoMenorTempo<0 || (comparaTempo(novo, listaCircuitos[i].menorTempo) < 0)){
+				listaCircuitos[i].menorTempo.minutos = novo.minutos;
+				listaCircuitos[i].menorTempo.segundos = novo.segundos;
+				listaCircuitos[i].menorTempo.milisegundos = novo.milisegundos;
+				listaCircuitos[i].idPilotoMenorTempo = idPiloto;
+				//TODO Gravar
+				remove("database/circuitos.txt");
+				for(j=0; j<qtdCircuitos; j++){
+					gravarCircuito(&listaCircuitos[j], 0);
+				}
+				break;
+			}
+		}
+	}
+}
+
+void excluirMelhorVolta(){
+	char opcao, msgConfirmacao[250];
+	melhorVolta listaVoltas[MAX_MELHORES_VOLTAS];
+	piloto listaPilotos[101];
+	circuito listaCircuitos[MAX_CIRCUITOS];
+	int qtdVoltasCadastrados=0, qtdCircuitosCadastrados, qtdPilotos=0, flagIsCadastrado=0, idPiloto=0, codCircuito=0, i=0;
+	FILE* arquivo;
+	
+	qtdVoltasCadastrados = buscaMelhoresVoltas(listaVoltas);
+	qtdPilotos = buscaPilotos(listaPilotos);
+	qtdCircuitosCadastrados = buscaCircuitos(listaCircuitos);
+	fflush(stdin);
+	do{
+		idPiloto = leValidaInteiro(0,100, "Informe o codigo/numero do piloto para consultar as voltas: ");
+		for(i=0; i<qtdPilotos; i++){
+			if(idPiloto == listaPilotos[i].id){
+				flagIsCadastrado = 1;
+			}
+		}
+	}while(!flagIsCadastrado);
+	fflush(stdin);
+	flagIsCadastrado=0;
+	do{
+		codCircuito = leValidaInteiro(0,999, "Informe o codigo do circuito para consultar as voltas: ");
+		for(i=0; i<qtdCircuitosCadastrados; i++){
+			if(codCircuito == listaCircuitos[i].id){
+				flagIsCadastrado = 1;
+			}
+		}
+	}while(!flagIsCadastrado);
+	remove("database/voltas.txt");
+	
+	for(i=0; i<qtdVoltasCadastrados; i++){
+		if(listaVoltas[i].idCircuito==codCircuito && listaVoltas[i].idPiloto==idPiloto){
+			sprintf(msgConfirmacao, "Deseja excluir a volta de %s em %s ?\n1-Sim\n2-Nao", listaVoltas[i].tempo, listaVoltas[i].data);
+			opcao = leValidaOpcao('1', '2', msgConfirmacao);
+			if(opcao=='2'){
+				gravarMelhorVolta(&listaVoltas[i], 0);
+			}
+		}else{
+			gravarMelhorVolta(&listaVoltas[i], 0);
+		}
+	}
+	
 }
 
