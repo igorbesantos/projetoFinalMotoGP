@@ -10,7 +10,7 @@
 
 #define TAM_NOME 50
 #define MAX_EQUIPES 50
-#define MAX_CIRCUITOS 50
+#define MAX_CIRCUITOS 150
 #define MAX_MELHORES_VOLTAS 50
 
 #include "commonUtils.c"
