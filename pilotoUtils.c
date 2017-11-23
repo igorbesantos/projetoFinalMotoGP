@@ -154,15 +154,16 @@ void cadastrarPiloto(){
 }
 
 void alterarPiloto(){
-	char opcao, menu[150] = "Escolha uma opcao:\n1-Ver lista de pilotos cadastrados\n2-Alterar piloto por codigo\n\n0-Voltar";
+	char opcao, msgConfirmacao[250], menu[150] = "Escolha uma opcao:\n1-Ver lista de pilotos cadastrados\n2-Alterar piloto por codigo\n\n0-Voltar";
 	piloto listaPilotos[101];
-	int qtdPilotos=0, i=0, isIdPilotoCadastrado=0;
+	piloto *pilotoPointer;
+	int qtdPilotos=0, i=0, isIdPilotoCadastrado=0, idPiloto=0;
 	
 	do{
 		opcao = leValidaOpcao('0','2', menu);
 		switch(opcao){
 		case '1':
-			for(i=0; i<*qtdPilotosCadastrados; i++){
+			for(i=0; i<qtdPilotos; i++){
 				printf("%03d - %s\n", listaPilotos[i].id, listaPilotos[i].nome);
 			}
 			system("pause");
@@ -170,14 +171,14 @@ void alterarPiloto(){
 			break;
 		case '2':
 			idPiloto = leValidaInteiro(0,100, "Informe o codigo/numero do piloto a ser alterado: ");
-			for(i=0; i<qtdPilotosCadastrados; i++){
+			for(i=0; i<qtdPilotos; i++){
 				if(idPiloto == listaPilotos[i].id){
 					isIdPilotoCadastrado = 1;
 				}
 			}
 			if(isIdPilotoCadastrado){
 				if(remove("database/pilotos.txt") == 0){
-					for(i=0; i<qtdPilotosCadastrados; i++){
+					for(i=0; i<qtdPilotos; i++){
 						if(idPiloto != listaPilotos[i].id){
 							pilotoPointer = &listaPilotos[i];
 							gravarPiloto(pilotoPointer, 0);
@@ -187,18 +188,16 @@ void alterarPiloto(){
 							switch(opcao){
 							case '1':
 								
-								leEquipe(1, &listaPilotos[i].siglaEquipe, 0, " ", "Informe a nova equipe do piloto:");
-								
 								leValidaNome("Informe o novo nome do piloto:\n", listaPilotos[i].nome);
 								
 								lePais(0, " ", 1, listaPilotos[i].pais, "Informe o novo pais do piloto: ");
 								
 								do{
 									printf("Informe o novo sexo do piloto:\nM - Masculino\nF - Feminino\n");
-									novo.sexo = getch();
-									novo.sexo = toupper(novo.sexo);
+									listaPilotos[i].sexo = getch();
+									listaPilotos[i].sexo = toupper(listaPilotos[i].sexo);
 									system("cls");
-								}while(novo.sexo!='F' && novo.sexo!='M');
+								}while(listaPilotos[i].sexo!='F' && listaPilotos[i].sexo!='M');
 								
 								pilotoPointer = &listaPilotos[i];
 								gravarPiloto(pilotoPointer, 0);
