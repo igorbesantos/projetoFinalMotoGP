@@ -129,13 +129,13 @@ int buscaCircuitos(circuito listaCircuitos[]){
 					converteCharParaInt(&aux, buffer);
 					switch(j){
 					case 0:
-						listaCircuitos[j].id += aux*100;
+						listaCircuitos[i].id += aux*100;
 						break;
 					case 1:
-						listaCircuitos[j].id += aux*10;
+						listaCircuitos[i].id += aux*10;
 						break;
 					case 2:
-						listaCircuitos[j].id += aux;
+						listaCircuitos[i].id += aux;
 						break;
 					}
 				}else if(j==3){
