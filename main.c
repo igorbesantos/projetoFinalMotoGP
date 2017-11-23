@@ -34,7 +34,8 @@ int main() {
 	char menu13[70] = "ALTERACAO DE DADOS DE CIRCUITOS\n\n1-Incluir\n2-Alterar\n\n0-Voltar";
 	char menu14[90] = "ALTERACAO DE DADOS DE MELHOR VOLTA\n\n1-Incluir\n2-Alterar\n3-Excluir\n\n0-Voltar";
 	char menu2[300] = "RELATORIOS\n\n1-Consulta em todos arquivos\n2-Pesquisar pilotos por nome\n3-Relacionar pilotos por circuito\n4-Consultar circuitos\n5-Consultar pilotos por equipe\n6-Pesquisar volta por tempo\n7-Consultar registros nao relacionados a nenhuma volta\n\n0-Voltar";
-	
+	char menuRel1[120] = "Relatorio 1\n1-Pesquisa piloto\n2-Arquivo pilotos.txt\n3-Arquivo equipes.txt\n4-Arquivo circuitos.txt\n5-Arquivo voltas.txt.";
+	char menuRel2[100] = "Relatorio 3\nPesquisar melhor volta por: \n1-ID do circuito.\n2-Data.";
 	char opcao;
 	int encerrarPrograma = 0;
 	
@@ -105,23 +106,31 @@ int main() {
 				switch(opcao){
 					case '1':
 						//TODO Rel1
-						leRelatorio1(1);
-						
+						opcao = leValidaOpcao('1', '5', menuRel1);
+						leRelatorio1(opcao);
 						break;
 					case '2':
 						//TODO Rel2
+						//Falta ordenar alfabeticamente 
+						leRelatorio2();
 						break;
 					case '3':
 						//TODO Rel3
+						opcao = leValidaOpcao('1', '2', menuRel2);
+						leRelatorio3(opcao);
 						break;
 					case '4':
 						//TODO Rel4
+						//Nao ensinou Alocação Dinâmica
 						break;
 					case '5':
 						//TODO Rel5
+						//Ordenar alfabeticamente
+						
 						break;
 					case '6':
 						//TODO Rel6
+						
 						break;
 					case '7':
 						//TODO Rel7
