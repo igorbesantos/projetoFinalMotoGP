@@ -10,7 +10,8 @@ void leRelatorio6();
 void leRelatorio7();
 
 //Funções
-/*1.Consulta simples sobre todos os arquivos existentes através da sua 
+/*Okay
+1.Consulta simples sobre todos os arquivos existentes através da sua 
 	chave única ou apresentar todos os dados cadastrados
 	.*/
 void leRelatorio1 (int opcao){
@@ -372,6 +373,7 @@ void leRelatorio7(){
 		for(cont2 = 0; cont2 < qtdMelhoresVoltas; cont2++){
 			if(piloto[cont2].id != melhoresVoltas[cont].idPiloto){
 				printf("%-50s%-13d\n", piloto[cont2].nome, piloto[cont].id);
+				
 			}
 		}
 		
@@ -381,7 +383,7 @@ void leRelatorio7(){
 	for(cont = 0; cont < qtdCircuitos; cont++){
 		for(cont3 = 0; cont3 < qtdMelhoresVoltas; cont3++){
 			if(circuitos[cont3].id != melhoresVoltas[cont].idCircuito){
-				printf("%-50s%-13d", circuitos[cont].nome, circuitos[cont].id);
+				printf("%-50s%-13d\n", circuitos[cont].nome, circuitos[cont].id);
 			}
 		}
 	}
