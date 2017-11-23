@@ -63,6 +63,7 @@ void leRelatorio1 (int opcao){
 		case '4':
 		//Arquivo de CIRCUITOS
 			qtdCircuitos = buscaCircuitos(circuitos);
+			//printf("\n%d\n", qtdCircuitos);
 			if(qtdCircuitos == 0){
 				printf("Arquivo circuitos.txt esta vazio!\n");
 			}else{
@@ -140,11 +141,12 @@ void leRelatorio2(){
 	system("cls");
 }
 
-/*3.Relacionar todos os pilotos que realizaram voltas em um circuito
-	específico fornecido pelo usuário, indicando todos os dados relacionados
-	com a sua volta rápida realizada neste circuito. O usuário poderá também
-	definir, além do circuito, uma data válida e completa para fazer esta
-	consulta
+/* Okay
+3.Relacionar todos os pilotos que realizaram voltas em um circuito
+específico fornecido pelo usuário, indicando todos os dados relacionados
+com a sua volta rápida realizada neste circuito. O usuário poderá também
+definir, além do circuito, uma data válida e completa para fazer esta
+consulta
 	.*/
 void leRelatorio3(int opcao){
 	piloto piloto[QTD_PILOTO];
@@ -205,14 +207,13 @@ void leRelatorio3(int opcao){
 				if(!valido){
 					printf("Data informada nao e valida! (Data minima: 04/06/2017)\n");
 				}
-				system("pause");
 				system("cls");
 			}while(valido == 0);
 			
 			strcpy(dataPesquisa, buffer);
 			
 			for(cont = 0; cont < qtdMelhoresVoltas; cont++){
-				if(strcmp(dataPesquisa, melhoresVoltas[cont].data) == 0){
+				if(strcmp(dataPesquisa, melhoresVoltas[cont].data)){
 					flag = 1;
 				}else{
 					flag = 0;
@@ -270,7 +271,7 @@ void leRelatorio5(){
 	}
 }
 
-/*
+/* Okay
 6.Pesquisar todos os pilotos, equipes e circuitos que realizaram um
 	tempo de volta menor ou igual ao fornecido pelo usuário (minutos, segundos
 	e milissegundos)

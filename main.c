@@ -110,12 +110,12 @@ int main() {
 						leRelatorio1(opcao);
 						break;
 					case '2':
-						//TODO Rel2
+						//TODO Rel2 
 						//Falta ordenar alfabeticamente 
 						leRelatorio2();
 						break;
 					case '3':
-						//TODO Rel3
+						//TODO Rel3 OKEY
 						opcao = leValidaOpcao('1', '2', menuRel2);
 						leRelatorio3(opcao);
 						break;
