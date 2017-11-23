@@ -7,7 +7,7 @@ void leRelatorio3(int opcao);
 void leRelatorio4();
 void leRelatorio5();
 void leRelatorio6();
-void leRelatorio7();
+void leRelatorio7(int opcao);
 
 //Funções
 /*Okay
@@ -20,7 +20,6 @@ void leRelatorio1 (int opcao){
 	melhorVolta melhoresVoltas[MAX_MELHORES_VOLTAS];
 	circuito circuitos[MAX_CIRCUITOS];
 	
-	FILE *arqPilotos;
 	int qtdPilotos = 0, qtdEquipes = 0, qtdCircuitos = 0, qtdMelhoresVoltas = 0, cont, idPesquisa;
 	
 	qtdPilotos = buscaPilotos(piloto);
@@ -71,7 +70,7 @@ void leRelatorio1 (int opcao){
 				printf("%-15s%-30s%-20s%-11s%-15s%-21s\n", "ID Circuito", "Nome", "Pais", "Tamanho", "Menor Tempo", "ID Piloto menor tempo");
 				for(cont = 0; cont < qtdCircuitos; cont++){
 					printf("%-15d%-30s%-20s%-11.2f", circuitos[cont].id, circuitos[cont].nome, circuitos[cont].pais, circuitos[cont].tamanho);
-					printf("%02d:%02d:%02d%10d\n",circuitos[cont].menorTempo.minutos,
+					printf("%02d:%02d:%02d%8d\n",circuitos[cont].menorTempo.minutos,
 					circuitos[cont].menorTempo.segundos,
 					circuitos[cont].menorTempo.milisegundos,
 					circuitos[cont].idPilotoMenorTempo);
@@ -139,7 +138,18 @@ void leRelatorio2(){
 			}
 		}
 	}else{
-		printf("Nao existe nenhum piloto com a string informada!");
+		printf("Nao existe nenhum piloto com a string informada!\n");
+	}
+	ordenaListaPilotos(qtdPilotos, piloto);
+	if(flag == 1){
+		printf("\n\n%-17s%-50s%-21s%-7s%-4s\n", "Identificacao", "Nome", "Data de Nascimento", "Sexo", "Pais");
+		for(cont= 0; cont < qtdPilotos; cont++){
+			if(strstr(pilotosAux[cont].nome, nomePilotoPesquisa)){
+				printf("%-17d%-50.50s%-21.11s%-7.c%-4.50s\n", piloto[cont].id, piloto[cont].nome, piloto[cont].dataNasc, piloto[cont].sexo, piloto[cont].pais);
+			}
+		}
+	}else{
+		printf("Nao existe nenhum piloto com a string informada!\n");
 	}
 	system("pause");
 	system("cls");
@@ -355,45 +365,105 @@ void leRelatorio6(){
 	system("cls");	
 }
 
-/*
+/* Okay
 7.Exibir todos os Pilotos, Equipes ou Circuitos que não estão
 	cadastrados em nenhuma Melhor Volta.
 	.
 */
-void leRelatorio7(){
-	int cont = 0, cont2 = 0, aux = 0, qtdCircuitos = 0, qtdMelhoresVoltas = 0, qtdPilotos = 0, flag[QTD_PILOTO] = {0};
+void leRelatorio7(int opcao){
+	int cont = 0, cont2 = 0, cont3 = 0, aux = 0, qtdCircuitos = 0, qtdMelhoresVoltas = 0, qtdPilotos = 0, qtdEquipes = 0, flag = 0;
 	piloto piloto[QTD_PILOTO], pilotoAux[QTD_PILOTO];
-	melhorVolta melhoresVoltas[MAX_MELHORES_VOLTAS], melhoresVoltasAux[MAX_MELHORES_VOLTAS];
+	melhorVolta melhoresVoltas[MAX_MELHORES_VOLTAS];
 	circuito circuitos[MAX_CIRCUITOS], circuitosAux[MAX_CIRCUITOS];
+	equipe equipes[MAX_EQUIPES], equipesAux[MAX_EQUIPES];
 	
 	qtdMelhoresVoltas = buscaMelhoresVoltas(melhoresVoltas);
-	qtdMelhoresVoltas = buscaMelhoresVoltas(melhoresVoltasAux);
 	qtdPilotos = buscaPilotos(piloto);
-	qtdPilotos = buscaPilotos(pilotoAux);
 	qtdCircuitos = buscaCircuitos(circuitos);
+	qtdEquipes = buscaEquipes(equipes);
+	//Auxiliares
+	qtdPilotos = buscaPilotos(pilotoAux);
 	qtdCircuitos = buscaCircuitos(circuitosAux);
+	qtdEquipes = buscaEquipes(equipesAux);
 	
-	for(cont = 0; cont < qtdMelhoresVoltas; cont++){
-		for(cont2 = 0; cont2 < qtdPilotos; cont2++){
-			if(piloto[cont2].id == melhoresVoltas[cont].idPiloto){
-				pilotoAux[cont2].id = 0;
-				break;
-			}
-		}
-	}
-	
-	if(pilotoAux[cont2].id == 0){
-		printf("%s\n\n%-50s%-13s\n","+=+=+Pilotos+=+=+", "Nome", "Identificacao");
-		for(cont = 0; cont < qtdMelhoresVoltas; cont++){
-			for(cont2 = 0; cont2 < qtdPilotos; cont2++){
-				if(pilotoAux[cont2].id != 0){	
-					printf("%-13d%-50s\n", piloto[cont2].id, piloto[cont2].nome);
+	switch(opcao){
+		case '1':
+		//Arquivo de PILOTOS
+			system("cls");
+			if(qtdPilotos == 0){
+				printf("Arquivo pilotos.txt esta vazio!\n");
+			}else{
+				printf("%-17s%-50s%-21s%-7s%-4s\n", "Identificacao", "Nome", "Data de Nascimento", "Sexo", "Pais");
+				for(cont = 0; cont < qtdPilotos; cont++){
+					flag = 0;
+					for(cont2 = 0; cont2 < qtdMelhoresVoltas; cont2++){
+						if(piloto[cont].id == melhoresVoltas[cont2].idPiloto){
+							flag = 1;
+						}
+					}
+					if(flag == 0){
+						printf("%-17d%-50.50s%-21.11s%-7.c%-4.50s\n", piloto[cont].id, piloto[cont].nome, piloto[cont].dataNasc, piloto[cont].sexo, piloto[cont].pais);
+						fflush(stdin);	
+					}	
 				}
 			}
-		}
+			break;
+		case '2':
+		//Arquivo de EQUIPES
+			for(cont = 0; cont < qtdEquipes; cont++){
+				for(cont2 = 0; cont2 < strlen(equipesAux[cont].sigla); cont2++){
+					equipesAux[cont].sigla[cont2] = toupper(equipesAux[cont].sigla[cont2]);
+				}
+			}
+			for(cont = 0; cont < qtdPilotos; cont++){
+				for(cont2 = 0; cont2 < strlen(pilotoAux[cont].siglaEquipe); cont2++){
+					pilotoAux[cont].siglaEquipe[cont2] = toupper(pilotoAux[cont].siglaEquipe[cont2]);
+				}
+			}
+			
+			system("cls");
+			if(qtdEquipes == 0){
+				printf("Arquivo equipes.txt esta vazio!\n");
+			}else{
+				printf("%-54s%-8s%-20s\n", "Nome", "Sigla", "Pais");
+				for(cont = 0; cont < qtdPilotos; cont++){
+					for(cont2 = 0; cont2 < qtdMelhoresVoltas; cont2++){
+						for(cont3 = 0; cont3 < qtdEquipes; cont3++){
+							flag = 0;
+							if(piloto[cont].id == melhoresVoltas[cont2].idPiloto){
+								if(strstr(pilotoAux[cont].siglaEquipe, equipesAux[cont3].sigla)){
+									flag = 1;
+								}								
+							}
+						}
+					}	
+					if(flag == 0){
+						printf("%-54s%-8s%-20s\n", equipes[cont2].nome, equipes[cont2].sigla, equipes[cont2].pais);
+						fflush(stdin);	
+					}
+				}
+			}
+			break;
+		case '3':
+			system("cls");
+			if(qtdCircuitos == 0){
+				printf("Arquivo circuitos.txt esta vazio!\n");
+			}else{
+				printf("%-15s%-30s%-20s%-11s\n", "ID Circuito", "Nome", "Pais", "Tamanho");
+				for(cont = 0; cont < qtdCircuitos; cont++){
+					flag = 0;
+					for(cont2 = 0; cont2 < qtdMelhoresVoltas; cont2++){
+						if(circuitos[cont].id == melhoresVoltas[cont2].idCircuito){
+							flag = 1;
+						}
+					}
+					if(flag == 0){
+						printf("%-15d%-30s%-20s%-11.2f\n", circuitos[cont].id, circuitos[cont].nome, circuitos[cont].pais, circuitos[cont].tamanho);							
+					}	
+				}
+			}
+			break;
 	}
-	
-	
 	
 	system("pause");
 	system("cls");
