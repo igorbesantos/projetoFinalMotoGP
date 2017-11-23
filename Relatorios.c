@@ -320,7 +320,6 @@ void leRelatorio6(){
 			if(minAux <= min){
 				if(segAux <= seg){
 					if(milisAux <= milis){
-						printf("HEllo\n");
 						for(cont2 = 0; cont2 < qtdPilotos; cont2++){
 							if(melhoresVoltas[cont].idPiloto == piloto[cont2].id){
 								printf("%-17d%-50s%-19s\n", piloto[cont2].id, piloto[cont2].nome, piloto[cont2].siglaEquipe);
