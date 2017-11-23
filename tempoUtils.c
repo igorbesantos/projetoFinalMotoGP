@@ -8,6 +8,7 @@ typedef struct {
 //Protótipos
 
 int comparaTempo (tempo t1, tempo t2);
+void recuperaTempoDeString(int *min, int  *seg, int *milis, char tempoFormatado[]);
 
 
 //Implementações
@@ -25,3 +26,34 @@ int comparaTempo (tempo t1, tempo t2) {
 	}
 	return resposta;
 }
+
+void recuperaTempoDeString(int *min, int  *seg, int *milis, char tempoFormatado[]){
+	int i=0, aux=0;
+	*min = 0;
+	*seg = 0;
+	*milis = 0;
+	for(i=0; i<8; i++){
+		converteCharParaInt(&aux, tempoFormatado[i]);
+		switch(i){
+		case 0:
+			*min += aux*10;
+			break;
+		case 1:
+			*min += aux;
+			break;
+		case 3:
+			seg += aux*10;
+			break;
+		case 4:
+			seg += aux;
+			break;
+		case 6:
+			milis += aux*10;
+			break;
+		case 7:
+			milis += aux;
+			break;
+		}
+	}
+}
+
