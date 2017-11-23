@@ -362,52 +362,39 @@ void leRelatorio6(){
 */
 void leRelatorio7(){
 	int cont = 0, cont2 = 0, aux = 0, qtdCircuitos = 0, qtdMelhoresVoltas = 0, qtdPilotos = 0, flag[QTD_PILOTO] = {0};
-	piloto piloto[QTD_PILOTO];
-	melhorVolta melhoresVoltas[MAX_MELHORES_VOLTAS];
-	circuito circuitos[MAX_CIRCUITOS];
+	piloto piloto[QTD_PILOTO], pilotoAux[QTD_PILOTO];
+	melhorVolta melhoresVoltas[MAX_MELHORES_VOLTAS], melhoresVoltasAux[MAX_MELHORES_VOLTAS];
+	circuito circuitos[MAX_CIRCUITOS], circuitosAux[MAX_CIRCUITOS];
 	
 	qtdMelhoresVoltas = buscaMelhoresVoltas(melhoresVoltas);
+	qtdMelhoresVoltas = buscaMelhoresVoltas(melhoresVoltasAux);
 	qtdPilotos = buscaPilotos(piloto);
+	qtdPilotos = buscaPilotos(pilotoAux);
+	qtdCircuitos = buscaCircuitos(circuitos);
+	qtdCircuitos = buscaCircuitos(circuitosAux);
 	
-	for(cont = 0; cont < qtdMelhoresVoltas ; cont++){
+	for(cont = 0; cont < qtdMelhoresVoltas; cont++){
 		for(cont2 = 0; cont2 < qtdPilotos; cont2++){
-			if(melhoresVoltas[cont].idPiloto == piloto[cont2].id){
-				flag[cont] = 1;
-			}else{
-				flag[cont] = 0;
-				aux = 1;
+			if(piloto[cont2].id == melhoresVoltas[cont].idPiloto){
+				pilotoAux[cont2].id = 0;
 				break;
 			}
 		}
-	//	if(flag[cont] == 1){
-	//		printf("%-50s%-13d\n", piloto[cont].nome, piloto[cont].id);
-	//	}
 	}
 	
-	if(aux == 1){
+	if(pilotoAux[cont2].id == 0){
 		printf("%s\n\n%-50s%-13s\n","+=+=+Pilotos+=+=+", "Nome", "Identificacao");
-		for(cont = 0; cont < qtdMelhoresVoltas ; cont++){
+		for(cont = 0; cont < qtdMelhoresVoltas; cont++){
 			for(cont2 = 0; cont2 < qtdPilotos; cont2++){
-				if(melhoresVoltas[cont].idPiloto == piloto[cont2].id){
-					flag[cont] = 1;
-				}else{
-					flag[cont] = 0;
+				if(pilotoAux[cont2].id != 0){	
+					printf("%-13d%-50s\n", piloto[cont2].id, piloto[cont2].nome);
 				}
 			}
-			if(flag[cont] == 1){
-				printf("%-50s%-13d\n", piloto[cont].nome, piloto[cont].id);
-			}
 		}
-	}	
+	}
 	
-/*	printf("\n%s\n\n%-50s%-13s\n","+=+=+Circuitos+=+=+", "Nome", "Identificacao");
-	for(cont = 0; cont < qtdCircuitos; cont++){
-		for(cont3 = 0; cont3 < qtdMelhoresVoltas; cont3++){
-			if(circuitos[cont3].id != melhoresVoltas[cont].idCircuito){
-				printf("%-50s%-13d\n", circuitos[cont].nome, circuitos[cont].id);
-			}
-		}
-	}*/
+	
+	
 	system("pause");
 	system("cls");
 }
