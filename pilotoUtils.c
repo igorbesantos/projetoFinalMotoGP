@@ -155,15 +155,79 @@ void cadastrarPiloto(){
 
 void alterarPiloto(){
 	char opcao, menu[150] = "Escolha uma opcao:\n1-Ver lista de pilotos cadastrados\n2-Alterar piloto por codigo\n\n0-Voltar";
+	piloto listaPilotos[101];
+	int qtdPilotos=0, i=0, isIdPilotoCadastrado=0;
 	
 	do{
 		opcao = leValidaOpcao('0','2', menu);
 		switch(opcao){
 		case '1':
-			//TODO
+			for(i=0; i<*qtdPilotosCadastrados; i++){
+				printf("%03d - %s\n", listaPilotos[i].id, listaPilotos[i].nome);
+			}
+			system("pause");
+			system("cls");
 			break;
 		case '2':
-			//TODO
+			idPiloto = leValidaInteiro(0,100, "Informe o codigo/numero do piloto a ser alterado: ");
+			for(i=0; i<qtdPilotosCadastrados; i++){
+				if(idPiloto == listaPilotos[i].id){
+					isIdPilotoCadastrado = 1;
+				}
+			}
+			if(isIdPilotoCadastrado){
+				if(remove("database/pilotos.txt") == 0){
+					for(i=0; i<qtdPilotosCadastrados; i++){
+						if(idPiloto != listaPilotos[i].id){
+							pilotoPointer = &listaPilotos[i];
+							gravarPiloto(pilotoPointer, 0);
+						}else{
+							sprintf(msgConfirmacao,"Deseja alterar o piloto %s ?\n1-Sim\n2-Nao", listaPilotos[i].nome);
+							opcao = leValidaOpcao('1', '2', msgConfirmacao);
+							switch(opcao){
+							case '1':
+								
+								leEquipe(1, &listaPilotos[i].siglaEquipe, 0, " ", "Informe a nova equipe do piloto:");
+								
+								leValidaNome("Informe o novo nome do piloto:\n", listaPilotos[i].nome);
+								
+								lePais(0, " ", 1, listaPilotos[i].pais, "Informe o novo pais do piloto: ");
+								
+								do{
+									printf("Informe o novo sexo do piloto:\nM - Masculino\nF - Feminino\n");
+									novo.sexo = getch();
+									novo.sexo = toupper(novo.sexo);
+									system("cls");
+								}while(novo.sexo!='F' && novo.sexo!='M');
+								
+								pilotoPointer = &listaPilotos[i];
+								gravarPiloto(pilotoPointer, 0);
+								
+								printf("Piloto %s alterado com sucesso!", listaPilotos[i].nome);
+								system("pause");
+								system("cls");
+								break;
+							case '2':
+								pilotoPointer = &listaPilotos[i];
+								gravarPiloto(pilotoPointer, 0);
+								printf("Alteracao cancelada!\n");
+								system("pause");
+								system("cls");
+								break;
+							}
+							opcao = '0';
+						}
+					}
+				}else{
+					printf("Nao foi possivel excluir o piloto!\n");
+					system("pause");
+					system("cls");
+				}
+			}else{
+				printf("Codigo/numero de piloto nao encontrado!\n");
+				system("pause");
+				system("cls");
+			}
 			break;
 		}
 	}while(opcao!='0');

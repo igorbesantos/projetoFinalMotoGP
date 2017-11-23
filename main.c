@@ -92,7 +92,7 @@ int main() {
 								cadastraMelhorVolta();
 								break;
 							case '2':
-								//TODO Alterar volta
+								alterarMelhorVolta();
 								break;
 							case '3':
 								excluirMelhorVolta();
