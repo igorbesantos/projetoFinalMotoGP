@@ -9,8 +9,23 @@ void leData(char *saidaFormatada, int anoMin, int anoMax);
 void formataData(char *saidaFormatada, int dia, int mes, int ano);
 void interpretaDataFormatada(int *dia, int *mes, int *ano, char *dataFormatada);
 int getDiaSemana(int dia, int mes, int ano);
+int comparaData(date d1, date d2);
 
 //Implementações
+int comparaData(date d1, date d2){
+	int resposta=0;
+	if(d1.ano==d2.ano){
+		if(d1.mes==d2.mes){
+			resposta = d1.dia - d2.dia;
+		}else{
+			resposta = d1.mes - d2.mes;
+		}
+	}else{
+		resposta = d1.ano - d2.ano;
+	}
+	return resposta;
+}
+
 void leData(char *saidaFormatada, int anoMin, int anoMax){
 	int ano=0, mes=0, dia=0, maxDia=0;
 	
