@@ -129,9 +129,7 @@ int getDiaSemana(int dia, int mes, int ano){
 		break;
 	}
 	
-	dia--;
-	
-	diaSemana = (diferencaAnos + qtdDiasExtraFev + codigoMes + dia)%7;
+	diaSemana = (diferencaAnos + qtdDiasExtraFev + codigoMes + dia - 1)%7;
 	printf("%d / %d / %d\n", dia, mes, ano);
 	system("pause");
 	
