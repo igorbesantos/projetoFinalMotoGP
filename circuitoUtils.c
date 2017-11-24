@@ -9,6 +9,7 @@ typedef struct {
 
 //Protótipos
 void cadastrarCircuito();
+void alterarCircuito();
 int getListaCircuitos(int flagRetornarCod, int listaCod[], int flagRetornarNomes, char listaNomes[][TAM_NOME]);
 void gravarCircuito(circuito *novo, int flagReceberFeedback);
 int buscaCircuitos(circuito listaCircuitos[]);
@@ -45,18 +46,101 @@ void cadastrarCircuito(){
 		system("cls");
 	}
 	
+	novo.menorTempo.minutos=0;
+	novo.menorTempo.segundos=0;
+	novo.menorTempo.milisegundos=0;
+	novo.idPilotoMenorTempo=999;
+	
 	gravarCircuito(&novo, 1);
+}
+
+void alterarCircuito() {
+	int qtdCircuitos=0, i=0, isIdCircuitoCadastrado=0, idCircuito=0;
+	char opcao, msgConfirmacao[250];
+	circuito listaCircuitos[MAX_CIRCUITOS];
+	
+	qtdCircuitos = buscaCircuitos(listaCircuitos);
+	
+	do{
+		opcao = leValidaOpcao('0','2', "Escolha uma opcao:\n1-Ver lista de circuitos cadastrados\n2-Alterar circuito por codigo\n\n0-Voltar");
+		switch(opcao){
+		case '1':
+			for(i=0; i<qtdCircuitos; i++){
+				printf("%03d - %s\n", listaCircuitos[i].id, listaCircuitos[i].nome);
+			}
+			system("pause");
+			system("cls");
+			break;
+		case '2':
+			isIdCircuitoCadastrado=0;
+			idCircuito = leValidaInteiro(0,999, "Informe o codigo do circuito a ser alterado: ");
+			for(i=0; i<qtdCircuitos; i++){
+				if(idCircuito == listaCircuitos[i].id){
+					isIdCircuitoCadastrado = 1;
+				}
+			}
+			if(isIdCircuitoCadastrado){
+				if(remove("database/circuito.txt")){
+					for(i=0; i<qtdCircuitos; i++){
+						if(idCircuito != listaCircuitos[i].id){
+							gravarCircuito(&listaCircuitos[i],0);
+						}else{
+							sprintf(msgConfirmacao,"Deseja alterar o circuito %s ?\n1-Sim\n2-Nao", listaCircuitos[i].nome);
+							opcao = leValidaOpcao('1', '2', msgConfirmacao);
+							switch(opcao){
+							case '1':
+								leValidaNome("Informe o novo nome do circuito:\n", listaCircuitos[i].nome);
+								
+								lePais(0, " ", 1, listaCircuitos[i].pais, "Informe a sigla do novo pais do circuito:\n");
+								
+								do{
+									printf("Informe o novo tamanho (em Km) do circuito:\n");
+									scanf("%f", &listaCircuitos[i].tamanho);
+									system("cls");
+								}while(listaCircuitos[i].tamanho<=0.0);
+								
+								printf("Circuito %s alterado com sucesso!\n", listaCircuitos[i].nome);
+								system("pause");
+								system("cls");
+								break;
+							case 2:
+								printf("Alteracao cancelada!\n");
+								system("pause");
+								system("cls");
+								break;
+							}
+							gravarCircuito(&listaCircuitos[i],0);
+							opcao = '0';
+						}
+					}
+				}else{
+					printf("Nao foi possivel acessar o arquivo de circuitos!");
+					system("pause");
+					system("cls");
+				}
+			}else{
+				printf("Não foi encontrado nenhum circuito com esse codigo!\n");
+				system("pause");
+				system("cls");
+			}
+			break;
+		}
+	}while(opcao!='0');
 }
 
 void gravarCircuito(circuito *novo, int flagReceberFeedback){
 	FILE* arquivo;
 	
 	if(arquivo = fopen("database/circuitos.txt", "a")){
-		fprintf(arquivo, "%03d %-50s %-50s %08.2f\n",
+		fprintf(arquivo, "%03d %-50s %-50s %08.2f %02d %02d %02d %03d\n",
 							novo[0].id,
 							novo[0].nome,
 							novo[0].pais,
-							novo[0].tamanho);
+							novo[0].tamanho,
+							novo[0].menorTempo.minutos,
+							novo[0].menorTempo.segundos,
+							novo[0].menorTempo.milisegundos,
+							novo[0].idPilotoMenorTempo);
 		fclose(arquivo);
 		if(flagReceberFeedback){
 			printf("Circuito %s cadastrado com sucesso!\n", novo[0].nome);

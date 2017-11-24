@@ -185,17 +185,20 @@ int qtdVoltasRealizadas(int idPiloto){
 }
 
 void verificaMelhorVoltaCircuito(int idCircuito, char tempoPiloto[], int idPiloto){
-	tempo novo;
+	tempo novo, zerado;
 	circuito listaCircuitos[MAX_CIRCUITOS];
 	int qtdCircuitos=0, i=0, j=0;
 	
+	zerado.milisegundos=0;
+	zerado.minutos=0;
+	zerado.segundos=0;
 	recuperaTempoDeString(&novo.minutos, &novo.segundos, &novo.milisegundos, tempoPiloto);
 	
 	qtdCircuitos = buscaCircuitos(listaCircuitos);
 	
 	for(i=0; i<qtdCircuitos; i++){
 		if(idCircuito == listaCircuitos[i].id){
-			if(listaCircuitos[i].idPilotoMenorTempo<0 || (comparaTempo(novo, listaCircuitos[i].menorTempo) < 0)){
+			if((comparaTempo(novo, listaCircuitos[i].menorTempo) < 0) || (comparaTempo(zerado, listaCircuitos[i].menorTempo)==0)){
 				listaCircuitos[i].menorTempo.minutos = novo.minutos;
 				listaCircuitos[i].menorTempo.segundos = novo.segundos;
 				listaCircuitos[i].menorTempo.milisegundos = novo.milisegundos;

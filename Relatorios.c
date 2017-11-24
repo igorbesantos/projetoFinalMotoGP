@@ -111,6 +111,9 @@ void leRelatorio2(){
 	
 	qtdPilotos = buscaPilotos(piloto);
 	qtdPilotos = buscaPilotos(pilotosAux);
+	
+	ordenaListaPilotos(qtdPilotos, piloto);
+	ordenaListaPilotos(qtdPilotos, pilotosAux);
 
 	leValidaNome("Informe o nome do Piloto para pesquisa: ", nomePilotoPesquisa);
 	for(cont = 0; cont < strlen(nomePilotoPesquisa); cont++){
@@ -132,17 +135,6 @@ void leRelatorio2(){
 	
 	if(flag == 1){
 		printf("%-17s%-50s%-21s%-7s%-4s\n", "Identificacao", "Nome", "Data de Nascimento", "Sexo", "Pais");
-		for(cont= 0; cont < qtdPilotos; cont++){
-			if(strstr(pilotosAux[cont].nome, nomePilotoPesquisa)){
-				printf("%-17d%-50.50s%-21.11s%-7.c%-4.50s\n", piloto[cont].id, piloto[cont].nome, piloto[cont].dataNasc, piloto[cont].sexo, piloto[cont].pais);
-			}
-		}
-	}else{
-		printf("Nao existe nenhum piloto com a string informada!\n");
-	}
-	ordenaListaPilotos(qtdPilotos, piloto);
-	if(flag == 1){
-		printf("\n\n%-17s%-50s%-21s%-7s%-4s\n", "Identificacao", "Nome", "Data de Nascimento", "Sexo", "Pais");
 		for(cont= 0; cont < qtdPilotos; cont++){
 			if(strstr(pilotosAux[cont].nome, nomePilotoPesquisa)){
 				printf("%-17d%-50.50s%-21.11s%-7.c%-4.50s\n", piloto[cont].id, piloto[cont].nome, piloto[cont].dataNasc, piloto[cont].sexo, piloto[cont].pais);

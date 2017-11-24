@@ -56,7 +56,6 @@ int main() {
 								cadastrarPiloto();
 								break;
 							case '2':
-								//TODO Alterar piloto
 								alterarPiloto();
 								break;
 							case '3':
@@ -83,7 +82,7 @@ int main() {
 								cadastrarCircuito();
 								break;
 							case '2':
-								//TODO Alterar circuito
+								alterarCircuito();
 								break;
 						}
 						break;

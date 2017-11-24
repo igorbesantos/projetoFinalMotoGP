@@ -159,6 +159,8 @@ void alterarPiloto(){
 	piloto *pilotoPointer;
 	int qtdPilotos=0, i=0, isIdPilotoCadastrado=0, idPiloto=0;
 	
+	qtdPilotos = buscaPilotos(listaPilotos);
+	
 	do{
 		opcao = leValidaOpcao('0','2', menu);
 		switch(opcao){
@@ -170,6 +172,7 @@ void alterarPiloto(){
 			system("cls");
 			break;
 		case '2':
+			isIdPilotoCadastrado=0;
 			idPiloto = leValidaInteiro(0,100, "Informe o codigo/numero do piloto a ser alterado: ");
 			for(i=0; i<qtdPilotos; i++){
 				if(idPiloto == listaPilotos[i].id){
@@ -187,6 +190,8 @@ void alterarPiloto(){
 							opcao = leValidaOpcao('1', '2', msgConfirmacao);
 							switch(opcao){
 							case '1':
+								
+								leEquipe(1, listaPilotos[i].siglaEquipe, 0, " ", "Informe a nova equipe do piloto> ");
 								
 								leValidaNome("Informe o novo nome do piloto:\n", listaPilotos[i].nome);
 								
@@ -218,7 +223,7 @@ void alterarPiloto(){
 						}
 					}
 				}else{
-					printf("Nao foi possivel excluir o piloto!\n");
+					printf("Nao foi possivel acessar o arquivo de pilotos!\n");
 					system("pause");
 					system("cls");
 				}
@@ -402,7 +407,7 @@ void ordenaListaPilotos(int qtdPilotos, piloto listaPilotos[]){
 	for(i=0; i<(qtdPilotos-1); i++){
 		posicao=i;
 		for(j=i+1; j<qtdPilotos; j++){
-			if(comparaNomes(listaPilotos[i].nome, listaPilotos[j].nome)>0){
+			if(strcoll(listaPilotos[i].nome, listaPilotos[j].nome)>0){
 				posicao = j;
 			}
 		}
